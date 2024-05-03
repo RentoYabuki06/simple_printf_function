@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:58:34 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/05/03 14:54:58 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/05/03 16:28:37 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,27 +56,6 @@ char	*ft_itoa(int n)
 }
 
 char	*ft_uitoa(unsigned int n)
-{
-	char	*ans;
-	size_t	len;
-
-	len = ft_numlen(n);
-	ans = (char *)malloc(sizeof(char) * (len + 1));
-	if (!ans)
-		return (NULL);
-	ans[len] = '\0';
-	while (len > 0)
-	{
-		len--;
-		if (ans[len] == '-')
-			break ;
-		ans[len] = n % 10 + '0';
-		n /= 10;
-	}
-	return (ans);
-}
-
-char	*ft_ulitoa(unsigned long long n)
 {
 	char	*ans;
 	size_t	len;

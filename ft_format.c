@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:30:51 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/05/03 15:14:26 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/05/03 16:06:09 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	ft_format(va_list args, const char format)
 	else if (format == 'u')
 		count_chars += ft_print_unsigned(va_arg(args, unsigned int));
 	else if (format == 'x' || format == 'X')
-		count_chars += ft_printc_hex(va_arg(args, unsigned int));
+		count_chars += ft_print_hex(va_arg(args, unsigned int), format);
 	else if (format == '%')
-		count_chars += ft_printpercent();
+		count_chars += ft_print_percent();
 	if (count_chars < 0)
 		return (-1);
 	return (count_chars);

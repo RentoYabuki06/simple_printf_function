@@ -6,13 +6,13 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:04:41 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/05/03 15:14:20 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/05/03 16:32:41 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_hex_len(unsigned long long num)
+int	ft_hex_len(unsigned long long num)
 {
 	int	len;
 
@@ -25,7 +25,7 @@ static int	ft_hex_len(unsigned long long num)
 	return (len);
 }
 
-static int	ft_put_hex(unsigned long long num, int is_lower)
+int	ft_put_hex(unsigned long long num, int is_lower)
 {
 	char	c;
 

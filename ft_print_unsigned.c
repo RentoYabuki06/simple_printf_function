@@ -1,41 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 14:04:25 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/05/03 16:36:05 by yabukirento      ###   ########.fr       */
+/*   Created: 2024/05/03 14:52:58 by yabukirento       #+#    #+#             */
+/*   Updated: 2024/05/03 15:54:10 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_print_unsigned(unsigned int a)
 {
-	int		i;
-	int		len_tmp;
-	int		len_total_len;
-	va_list	args;
+	int		count;
+	char	*tmp;
 
-	i = 0;
-	len_total_len = 0;
-	va_start(args, format);
-	while (format[i])
-	{
-		if (format[i] == '%')
-		{
-			len_tmp = ft_format(args, format[++i]);
-		}
-		else
-			len_tmp = ft_printchar(format[i]);
-		if (len_tmp >= 0)
-			len_total_len += len_tmp;
-		else
-			return (-1);
-		i++;
-	}
-	va_end(args);
-	return (len_total_len);
+	count = 0;
+	tmp = ft_itoa(a);
+	if (!tmp)
+		return (-1);
+	count += ft_printstr(tmp);
+	free(tmp);
+	return (count);
 }
