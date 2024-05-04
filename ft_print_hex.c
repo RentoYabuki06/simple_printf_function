@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:04:41 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/05/03 16:32:41 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/05/04 15:55:12 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_put_hex(unsigned long long num, int is_lower)
 
 int	ft_print_hex(unsigned int nbr, char format)
 {
-	int	printed_chars;
+	int	count;
 
 	if (nbr == 0)
 		return (write(1, "0", 1));
@@ -61,7 +61,7 @@ int	ft_print_hex(unsigned int nbr, char format)
 	{
 		if (0 > ft_put_hex(nbr, format == 'x'))
 			return (-1);
-		printed_chars = ft_hex_len(nbr);
+		count = ft_hex_len(nbr);
 	}
-	return (printed_chars);
+	return (count);
 }

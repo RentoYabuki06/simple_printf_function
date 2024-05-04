@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printptr.c                                      :+:      :+:    :+:   */
+/*   ft_printa.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,8 +14,25 @@
 
 int	ft_printptr(unsigned long long a)
 {
-	int		count;
+	int	len_str;
 
-	count = (int)a;
-	return (count);
+	len_str = 0;
+	if (0 <= write(1, "0x", 2))
+		len_str += 2;
+	else
+		return (-1);
+	if (a == 0)
+	{
+		if (0 <= write(1, "0", 1))
+			len_str++;
+		else
+			return (-1);
+	}
+	else
+	{
+		if (0 > ft_put_hex(a, 1))
+			return (-1);
+		len_str += ft_hex_len(a);
+	}
+	return (len_str);
 }

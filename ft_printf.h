@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:59:11 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/05/03 16:32:08 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/05/04 17:33:45 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 # include <stddef.h>
 # include <stdarg.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 char	*ft_itoa(int n);
 char	*ft_uitoa(unsigned int n);
 int		ft_printchar(int a);
 int		ft_printstr(const char *str);
-int		ft_format(va_list args, const char format);
+int		ft_format(va_list *args, const char format);
 int		ft_printf(const char *format, ...);
 int		ft_print_percent(void);
 int		ft_printptr(unsigned long long a);

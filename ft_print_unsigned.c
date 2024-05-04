@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:52:58 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/05/03 15:54:10 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/05/04 15:53:27 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@ int	ft_print_unsigned(unsigned int a)
 	int		count;
 	char	*tmp;
 
-	count = 0;
-	tmp = ft_itoa(a);
+	tmp = ft_uitoa(a);
 	if (!tmp)
 		return (-1);
-	count += ft_printstr(tmp);
+	count = ft_printstr(tmp);
 	free(tmp);
 	return (count);
 }

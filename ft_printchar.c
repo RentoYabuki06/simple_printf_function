@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:22:37 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/05/03 16:23:55 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/05/04 17:23:32 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_printchar(int a)
 {
-	if (0 <= write(1, &a, 1))
+	if (write(1, &a, 1) == 1)
 		return (1);
 	else
 		return (-1);

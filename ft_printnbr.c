@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:51:00 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/05/03 16:25:15 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/05/04 15:47:47 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	ft_printnbr(int a)
 	int		count;
 	char	*tmp;
 
-	count = 0;
 	tmp = ft_itoa(a);
 	if (!tmp)
 		return (-1);
