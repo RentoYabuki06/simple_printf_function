@@ -6,28 +6,39 @@
 #    By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:59:44 by yabukirento       #+#    #+#              #
-#    Updated: 2024/05/03 15:36:46 by yabukirento      ###   ########.fr        #
+#    Updated: 2025/03/31 18:11:42 by yabukirento      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS =	ft_itoa.c \
-		ft_printchar.c \
-		ft_printstr.c \
-		ft_format.c \
-		ft_printf.c \
-		ft_print_percent.c \
-		ft_printptr.c \
-		ft_printnbr.c \
-		ft_print_hex.c \
-		ft_print_unsigned.c \
-		ft_strdup.c
-		
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+INCLUDES = -I./includes
+
+SRC_DIR = src
+PRINT_FUNC_DIR = $(SRC_DIR)/print_functions
+UTILS_DIR = $(SRC_DIR)/utils
+
+PRINT_SRCS = $(addprefix $(PRINT_FUNC_DIR)/, \
+	ft_print_hex.c \
+	ft_print_percent.c \
+	ft_print_unsigned.c \
+	ft_print_char.c \
+	ft_print_nbr.c \
+	ft_print_ptr.c \
+	ft_print_str.c)
+
+UTILS_SRCS = $(addprefix $(UTILS_DIR)/, \
+	ft_itoa.c \
+	ft_strdup.c)
+
+MAIN_SRCS = $(addprefix $(SRC_DIR)/, \
+	ft_printf.c)
+
+SRCS = $(PRINT_SRCS) $(UTILS_SRCS) $(MAIN_SRCS)
 
 OBJS = $(SRCS:.c=.o)
 
-NAME = libftprintf.a
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+NAME = libftprintf.aa
 
 all: $(NAME)
 
@@ -36,12 +47,14 @@ $(NAME): $(OBJS)
 	ranlib $@
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	$(RM) $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re
