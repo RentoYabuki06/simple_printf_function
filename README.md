@@ -1,91 +1,90 @@
-# ft_printf - カスタムprintf関数の実装
+# ft_printf - Custom printf Function Implementation
 
-## 概要
-**ft_printf** は42Tokyoの課題の一つで、C言語の標準関数 `printf` を自作するプロジェクトです。この課題では、可変引数、フォーマット指定子の解析、出力処理を通じて、システムプログラミングのスキルを強化します。
-
----
-
-## プロジェクトの目的
-1. **可変引数の扱い方を習得**：
-   - `stdarg.h` を用いた可変引数の処理。
-2. **フォーマット指定子の解析と処理**：
-   - 文字列、整数、16進数などのデータ型の処理実装。
-3. **低レベルプログラミングのスキル向上**：
-   - 出力フォーマットの制御と文字列操作。
-4. **C言語のエラーハンドリングと最適化**：
-   - メモリ管理とパフォーマンス最適化の実践。
+## Overview
+**ft_printf** is one of the 42Tokyo projects that involves creating your own version of the C standard library function `printf`. This project strengthens system programming skills through variable arguments, format specifier parsing, and output processing.
 
 ---
 
-## 機能一覧
-- **対応フォーマット指定子**：
-  - `%c`：文字。
-  - `%s`：文字列。
-  - `%p`：ポインタアドレス。
-  - `%d`と`%i`：10進整数。
-  - `%u`：符号なし10進整数。
-  - `%x`と`%X`：16進整数（小文字と大文字）。
-  - `%%`：パーセント文字。
-- **フラグ対応**：
-  - 幅指定、精度指定、左寄せやゼロ埋め。
-- **エラーハンドリング**：
-  - 無効なフォーマット文字列への対処。
+## Project Objectives
+1. **Learning to handle variable arguments**:
+   - Using `stdarg.h` for processing variable arguments.
+2. **Parsing and processing format specifiers**:
+   - Implementing processing for strings, integers, hexadecimal numbers, and other data types.
+3. **Improving low-level programming skills**:
+   - Controlling output formats and manipulating strings.
+4. **C language error handling and optimization**:
+   - Practicing memory management and performance optimization.
 
 ---
 
-## 実装要件
-1. **ライブラリ制限**：
-   - 標準Cライブラリ関数は使用不可（一部例外あり）。
-2. **エラーハンドリング**：
-   - 引数の誤りやメモリエラーへの対応。
-3. **コード規約の遵守**：
-   - 42のノーム規約に準拠すること。
+## Feature List
+- **Supported format specifiers**:
+  - `%c`: Character.
+  - `%s`: String.
+  - `%p`: Pointer address.
+  - `%d` and `%i`: Decimal integers.
+  - `%u`: Unsigned decimal integer.
+  - `%x` and `%X`: Hexadecimal integers (lowercase and uppercase).
+  - `%%`: Percent character.
+- **Flag support**:
+  - Width specification, precision specification, left-align, and zero-padding.
+- **Error handling**:
+  - Handling invalid format strings.
 
 ---
 
-## 使用方法
-### 必要環境
-- LinuxまたはmacOS。
-- `make` コマンドと `gcc` コンパイラがインストールされていること。
+## Implementation Requirements
+1. **Library restrictions**:
+   - Standard C library functions cannot be used (with some exceptions).
+2. **Error handling**:
+   - Handling argument errors and memory errors.
+3. **Code standard compliance**:
+   - Must comply with the 42 norm standards.
 
-### コンパイル
+---
+
+## Usage
+### Requirements
+- Linux or macOS.
+- `make` command and `gcc` compiler installed.
+
+### Compilation
 ```
 make
 ```
-### 使用例
+### Example Usage
 ```
 #include "ft_printf.h"
 
 int main()
 {
-    ft_printf("文字列: %s\n", "Hello, World!");
-    ft_printf("整数: %d\n", 42);
-    ft_printf("16進数: %x\n", 255);
+    ft_printf("String: %s\n", "Hello, World!");
+    ft_printf("Integer: %d\n", 42);
+    ft_printf("Hexadecimal: %x\n", 255);
     return 0;
 }
 ```
 
 ---
 
-## 課題の学びポイント
-- **フォーマット指定子の解析と処理**：
-  複雑な文字列解析と動的な出力処理。
-- **可変引数の利用**：
-  柔軟な引数管理と汎用性のある関数設計。
-- **低レベルの文字列操作**：
-  効率的な文字列や数値操作アルゴリズムの理解。
-- **エラーハンドリングの強化**：
-  無効入力や境界条件への対応力。
+## Learning Points
+- **Parsing and processing format specifiers**:
+  Complex string parsing and dynamic output processing.
+- **Using variable arguments**:
+  Flexible argument management and versatile function design.
+- **Low-level string manipulation**:
+  Understanding efficient string and numerical manipulation algorithms.
+- **Enhancing error handling**:
+  Handling invalid inputs and edge cases.
 
 ---
 
-## 参考リンク
-- [42Tokyo公式ページ](https://42tokyo.jp/)
-- [ft_printf課題仕様書](https://github.com/42tokyo/ft_printf)
+## References
+- [42Tokyo Official Page](https://42tokyo.jp/)
 - [Linux man pages - printf(3)](https://man7.org/linux/man-pages/man3/printf.3.html)
 
 ---
 
-## ライセンス
-このプロジェクトは42Tokyoの課題の一部であり、教育目的で使用されます。再配布や商用利用は制限される場合があります。
+## License
+This project is part of the 42Tokyo curriculum and is intended for educational purposes. Redistribution or commercial use may be restricted.
 
