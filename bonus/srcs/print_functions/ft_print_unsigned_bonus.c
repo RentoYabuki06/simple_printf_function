@@ -6,13 +6,13 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:39:10 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 16:41:36 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 18:37:37 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-static int	ft_len_unsigned_int(unsigned int num)
+static int	ft_len_unsigned_int_bonus(unsigned int num)
 {
 	int	len;
 
@@ -25,26 +25,44 @@ static int	ft_len_unsigned_int(unsigned int num)
 	return (len);
 }
 
-static int	ft_put_unsiged_int(unsigned int num)
+static int	ft_put_unsiged_int_bonus(unsigned int num)
 {
 	if (num >= 10)
 	{
-		if (ft_put_unsiged_int(num / 10) < 0)
+		if (ft_put_unsiged_int_bonus(num / 10) < 0)
 			return (-1);
-		if (ft_put_unsiged_int(num % 10) < 0)
+		if (ft_put_unsiged_int_bonus(num % 10) < 0)
 			return (-1);
 	}
 	else
-		return (ft_print_char('0' + num));
+		return (ft_put_char('0' + num));
 	return (EXIT_SUCCESS);
 }
 
 int	ft_print_unsigned_bonus(unsigned int num, t_option *option)
 {
-	(void)	option;
+	int	width;
+	int	total_len;
+	int	num_len;
+
+	width = (*option).width;
+	total_len = width;
+	num_len = ft_len_unsigned_int_bonus(num);
+	if (num_len > width)
+		total_len = num_len;
 	if (num == 0)
-		return (ft_print_char('0'));
-	if (ft_put_unsiged_int(num) < 0)
+		return (ft_put_char('0'));
+	if ((*option).left_aligned == true)
+	{
+		if (ft_put_unsiged_int_bonus(num) < 0)
+			return (-1);
+	}
+	if (ft_put_space_or_zero(width, num_len, option) < 0)
 		return (-1);
-	return (ft_len_unsigned_int(num));
+	if ((*option).left_aligned == false)
+	{
+		if (ft_put_unsiged_int_bonus(num) < 0)
+			return (-1);
+	}
+	return (total_len);
 }

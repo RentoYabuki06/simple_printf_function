@@ -6,13 +6,13 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:36:02 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 16:49:15 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 18:50:22 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-static int	ft_print_format(va_list *args, t_option *option)
+static int	ft_print_format_bonus(va_list *args, t_option *option)
 {
 	int		count_chars;
 	char	format;
@@ -20,19 +20,19 @@ static int	ft_print_format(va_list *args, t_option *option)
 	format = (*option).specifier;
 	count_chars = 0;
 	if (format == 'c')
-		count_chars = ft_print_char_bonus(va_arg(*args, int), option);
+		count_chars += ft_print_char_bonus(va_arg(*args, int), option);
 	else if (format == 's')
-		count_chars = ft_print_str_bonus(va_arg(*args, char *), option);
+		count_chars += ft_print_str_bonus(va_arg(*args, char *), option);
 	else if (format == 'p')
-		count_chars = ft_print_ptr_bonus(va_arg(*args, unsigned long long), option);
+		count_chars += ft_print_ptr_bonus(va_arg(*args, unsigned long long), option);
 	else if (format == 'd' || format == 'i')
-		count_chars = ft_print_nbr_bonus(va_arg(*args, int), option);
+		count_chars += ft_print_nbr_bonus(va_arg(*args, int), option);
 	else if (format == 'u')
-		count_chars = ft_print_unsigned_bonus(va_arg(*args, unsigned int), option);
+		count_chars += ft_print_unsigned_bonus(va_arg(*args, unsigned int), option);
 	else if (format == 'x' || format == 'X')
-		count_chars = ft_print_hex_bonus(va_arg(*args, unsigned int), format, option);
+		count_chars += ft_print_hex_bonus(va_arg(*args, unsigned int), format, option);
 	else if (format == '%')
-		count_chars = ft_print_percent(option);
+		count_chars += ft_print_percent_bonus(option);
 	return (count_chars);
 }
 
@@ -62,11 +62,11 @@ int	ft_printf(const char *format, ...)
 				len_total_len = -1;
 				break;
 			}
-			len_tmp = ft_print_format(&args, &option);
+			len_tmp = ft_print_format_bonus(&args, &option);
 			i += parse_len;
 		}
 		else
-			len_tmp = ft_print_char(tmp_format[i]);
+			len_tmp = ft_put_char(tmp_format[i]);
 		if (len_tmp < 0)
 		{
 			len_total_len = -1;

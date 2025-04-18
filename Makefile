@@ -6,7 +6,7 @@
 #    By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:59:44 by yabukirento       #+#    #+#              #
-#    Updated: 2025/04/18 17:07:07 by yabukirento      ###   ########.fr        #
+#    Updated: 2025/04/18 18:53:26 by yabukirento      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRCS_BONUS =	bonus/srcs/ft_printf_bonus.c \
 				bonus/srcs/utils/ft_isdigit_bonus.c \
 				bonus/srcs/utils/ft_atoi_bonus.c \
 				bonus/srcs/utils/ft_put_space_bonus.c \
+				bonus/srcs/utils/ft_put_char_bonus.c \
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
@@ -56,11 +57,21 @@ srcs/%.o: srcs/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
+# ボーナスターゲットを修正
 bonus: $(OBJS_BONUS)
 	ar rc $(NAME) $(OBJS_BONUS)
 	ranlib $(NAME)
 
-bonus/%.o: bonus/%.c
+# ボーナスオブジェクトファイル用のより具体的なパターンルール
+bonus/srcs/%.o: bonus/srcs/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INCLUDES_BONUS) -c $< -o $@
+
+bonus/srcs/print_functions/%.o: bonus/srcs/print_functions/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INCLUDES_BONUS) -c $< -o $@
+
+bonus/srcs/utils/%.o: bonus/srcs/utils/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES_BONUS) -c $< -o $@
 
@@ -72,8 +83,6 @@ fclean: clean
 
 re: fclean all
 
-# テストターゲットの修正・追加
-
 # 通常版テスト（既存）
 test: $(NAME)
 	$(CC) $(INCLUDES) -o test_printf main.c -L. -lftprintf
@@ -81,9 +90,9 @@ test: $(NAME)
 	$(RM) test_printf
 	@echo "Standard version test completed."
 
-# ボーナス版テスト（新規追加）
+# ボーナステストを修正
 test_bonus: bonus
-	$(CC) $(INCLUDES_BONUS) -o test_bonus main.c -L. -lftprintf
+	$(CC) $(INCLUDES_BONUS) -D BONUS_TEST=1 -o test_bonus main.c -L. -lftprintf
 	./test_bonus
 	$(RM) test_bonus
 	@echo "Bonus version test completed."

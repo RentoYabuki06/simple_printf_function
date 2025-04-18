@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 16:34:13 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 16:56:55 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 18:35:25 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	ft_parse_format(char *format, t_option *option)
 		ft_set_flag(format[i++], option);
 	if (ft_isdigit(format[i]) == true)
 		option->width = ft_atoi(&format[i]);
-		i += ft_len_num(option->width);
+	i += ft_len_num(option->width);
 	if (option->width > 0)
 		option->left_aligned = false;
 	if (option->show_plus == true)

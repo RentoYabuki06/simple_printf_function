@@ -6,11 +6,12 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:20:00 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 15:31:22 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 19:00:52 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_printf.h"
+#include "bonus/includes/ft_printf_bonus.h"
 #include <stdio.h>
 #include <limits.h>
 
