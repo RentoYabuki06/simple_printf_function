@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:58 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 19:02:53 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 19:33:08 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_print_ptr_bonus(unsigned long long ptr, t_option *option)
 	int	ptr_len;
 	
 	if (ptr == 0)
-		return (write(STDOUT_FILENO, "(nil)", 6));
+		return (write(STDOUT_FILENO, "(nil)", 5));
 	width = (*option).width;
 	total_len = width;
 	ptr_len = ft_hex_len_bonus(ptr) + 2;

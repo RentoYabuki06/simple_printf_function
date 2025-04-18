@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:20:00 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 19:00:52 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 19:34:58 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@
 int g_test_count = 0;
 int g_test_passed = 0;
 
-// 出力長さの比較と結果表示
-void compare_length(int ft_len, int std_len, const char *test_name)
+// 出力長さの比較と結果表示を拡張
+void compare_length(int ft_len, int std_len, const char *test_name, const char *format, ...)
 {
     g_test_count++;
+    printf("テスト: [%s] - フォーマット: \"%s\"\n", test_name, format);
     printf("出力長さ: ft_printf=%d, printf=%d ", ft_len, std_len);
     
     if (ft_len == std_len)
@@ -46,63 +47,82 @@ void test_format_specifiers(void)
 {
     int ft_len;
     int std_len;
+    char *format;
     
     printf("\n%s===== フォーマット指定子のテスト =====%s\n", BLUE, RESET);
     
     // %c テスト
     printf("\n%s----- %%c テスト -----%s\n", YELLOW, RESET);
-    ft_len = ft_printf("ft_printf: %c\n", 'A');
+    format = "ft_printf: %c\n";
+    printf("入力: \"%s\", 文字='A'\n", format);
+    ft_len = ft_printf(format, 'A');
     std_len = printf("printf:    %c\n", 'A');
-    compare_length(ft_len, std_len, "%c");
+    compare_length(ft_len, std_len, "%c", format);
     
     // %s テスト
     printf("\n%s----- %%s テスト -----%s\n", YELLOW, RESET);
-    ft_len = ft_printf("ft_printf: %s\n", "Hello World");
+    format = "ft_printf: %s\n";
+    printf("入力: \"%s\", 文字列=\"Hello World\"\n", format);
+    ft_len = ft_printf(format, "Hello World");
     std_len = printf("printf:    %s\n", "Hello World");
-    compare_length(ft_len, std_len, "%s");
+    compare_length(ft_len, std_len, "%s", format);
     
     // %p テスト
     int num = 42;
     printf("\n%s----- %%p テスト -----%s\n", YELLOW, RESET);
-    ft_len = ft_printf("ft_printf: %p\n", &num);
+    format = "ft_printf: %p\n";
+    printf("入力: \"%s\", ポインタ=&num\n", format);
+    ft_len = ft_printf(format, &num);
     std_len = printf("printf:    %p\n", &num);
-    compare_length(ft_len, std_len, "%p");
+    compare_length(ft_len, std_len, "%p", format);
     
     // %d テスト
     printf("\n%s----- %%d テスト -----%s\n", YELLOW, RESET);
-    ft_len = ft_printf("ft_printf: %d\n", 12345);
+    format = "ft_printf: %d\n";
+    printf("入力: \"%s\", 数値=12345\n", format);
+    ft_len = ft_printf(format, 12345);
     std_len = printf("printf:    %d\n", 12345);
-    compare_length(ft_len, std_len, "%d");
+    compare_length(ft_len, std_len, "%d", format);
     
     // %i テスト
     printf("\n%s----- %%i テスト -----%s\n", YELLOW, RESET);
-    ft_len = ft_printf("ft_printf: %i\n", -9876);
+    format = "ft_printf: %i\n";
+    printf("入力: \"%s\", 数値=-9876\n", format);
+    ft_len = ft_printf(format, -9876);
     std_len = printf("printf:    %i\n", -9876);
-    compare_length(ft_len, std_len, "%i");
+    compare_length(ft_len, std_len, "%i", format);
     
     // %u テスト
     printf("\n%s----- %%u テスト -----%s\n", YELLOW, RESET);
-    ft_len = ft_printf("ft_printf: %u\n", UINT_MAX);
+    format = "ft_printf: %u\n";
+    printf("入力: \"%s\", 数値=UINT_MAX\n", format);
+    ft_len = ft_printf(format, UINT_MAX);
     std_len = printf("printf:    %u\n", UINT_MAX);
-    compare_length(ft_len, std_len, "%u");
+    compare_length(ft_len, std_len, "%u", format);
     
     // %x テスト
     printf("\n%s----- %%x テスト -----%s\n", YELLOW, RESET);
-    ft_len = ft_printf("ft_printf: %x\n", 0xABCDEF);
+    format = "ft_printf: %x\n";
+    printf("入力: \"%s\", 数値=0xABCDEF\n", format);
+    ft_len = ft_printf(format, 0xABCDEF);
     std_len = printf("printf:    %x\n", 0xABCDEF);
-    compare_length(ft_len, std_len, "%x");
+    compare_length(ft_len, std_len, "%x", format);
     
     // %X テスト
     printf("\n%s----- %%X テスト -----%s\n", YELLOW, RESET);
-    ft_len = ft_printf("ft_printf: %X\n", 0xabcdef);
+    format = "ft_printf: %X\n";
+    printf("入力: \"%s\", 数値=0xabcdef\n", format);
+    ft_len = ft_printf(format, 0xabcdef);
     std_len = printf("printf:    %X\n", 0xabcdef);
-    compare_length(ft_len, std_len, "%X");
+    compare_length(ft_len, std_len, "%X", format);
     
     // %% テスト
     printf("\n%s----- %%%% テスト -----%s\n", YELLOW, RESET);
-    ft_len = ft_printf("ft_printf: %%\n");
+    format = "ft_printf: %%\n";
+    printf("入力: \"%s\"\n", format);
+    ft_len = ft_printf(format);
     std_len = printf("printf:    %%\n");
-    compare_length(ft_len, std_len, "%%");
+    compare_length(ft_len, std_len, "%%", format);
 }
 
 // エッジケースのテスト
@@ -116,31 +136,31 @@ void test_edge_cases(void)
     printf("\n%s----- NULL文字列テスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: %s\n", NULL);
     std_len = printf("printf:    %s\n", NULL);
-    compare_length(ft_len, std_len, "NULL %s");
+    compare_length(ft_len, std_len, "NULL %s", "ft_printf: %s\n");
     
     // 空文字列
     printf("\n%s----- 空文字列テスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: %s\n", "");
     std_len = printf("printf:    %s\n", "");
-    compare_length(ft_len, std_len, "empty %s");
+    compare_length(ft_len, std_len, "empty %s", "ft_printf: %s\n");
     
     // INT_MIN
     printf("\n%s----- INT_MIN テスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: %d\n", INT_MIN);
     std_len = printf("printf:    %d\n", INT_MIN);
-    compare_length(ft_len, std_len, "INT_MIN");
+    compare_length(ft_len, std_len, "INT_MIN", "ft_printf: %d\n");
     
     // INT_MAX
     printf("\n%s----- INT_MAX テスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: %d\n", INT_MAX);
     std_len = printf("printf:    %d\n", INT_MAX);
-    compare_length(ft_len, std_len, "INT_MAX");
+    compare_length(ft_len, std_len, "INT_MAX", "ft_printf: %d\n");
     
     // NULLポインタ（%p）
     printf("\n%s----- NULL ポインタ（%%p）テスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: %p\n", NULL);
     std_len = printf("printf:    %p\n", NULL);
-    compare_length(ft_len, std_len, "NULL %p");
+    compare_length(ft_len, std_len, "NULL %p", "ft_printf: %p\n");
 }
 
 // 複合フォーマットのテスト
@@ -154,13 +174,13 @@ void test_combined_formats(void)
     printf("\n%s----- 複合テスト1 -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: 文字[%c] 文字列[%s] 数値[%d] 16進数[%x]\n", 'Z', "test", 42, 255);
     std_len = printf("printf:    文字[%c] 文字列[%s] 数値[%d] 16進数[%x]\n", 'Z', "test", 42, 255);
-    compare_length(ft_len, std_len, "複合1");
+    compare_length(ft_len, std_len, "複合1", "ft_printf: 文字[%c] 文字列[%s] 数値[%d] 16進数[%x]\n");
     
     // 複合テスト2
     printf("\n%s----- 複合テスト2 -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: 複数の数値: %d, %i, %u, %x, %X\n", 123, -456, 789, 255, 255);
     std_len = printf("printf:    複数の数値: %d, %i, %u, %x, %X\n", 123, -456, 789, 255, 255);
-    compare_length(ft_len, std_len, "複合2");
+    compare_length(ft_len, std_len, "複合2", "ft_printf: 複数の数値: %d, %i, %u, %x, %X\n");
 }
 
 // 連続したパーセント記号のテスト
@@ -172,7 +192,7 @@ void test_consecutive_percent(void)
     
     ft_len = ft_printf("ft_printf: %%%%%%\n");
     std_len = printf("printf:    %%%%%%\n");
-    compare_length(ft_len, std_len, "連続%%");
+    compare_length(ft_len, std_len, "連続%%", "ft_printf: %%%%%%\n");
 }
 
 // テスト結果のサマリーを表示
@@ -206,19 +226,19 @@ void test_special_numbers(void)
     printf("\n%s----- ゼロ値テスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: 整数0[%d] 16進数0[%x][%X]\n", 0, 0, 0);
     std_len = printf("printf:    整数0[%d] 16進数0[%x][%X]\n", 0, 0, 0);
-    compare_length(ft_len, std_len, "ゼロ値");
+    compare_length(ft_len, std_len, "ゼロ値", "ft_printf: 整数0[%d] 16進数0[%x][%X]\n");
     
     // 負の16進数
     printf("\n%s----- 負の16進数テスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: %%x[%x] %%X[%X]\n", -42, -42);
     std_len = printf("printf:    %%x[%x] %%X[%X]\n", -42, -42);
-    compare_length(ft_len, std_len, "負の16進数");
+    compare_length(ft_len, std_len, "負の16進数", "ft_printf: %%x[%x] %%X[%X]\n");
     
     // 大きな値
     printf("\n%s----- 大きな値テスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: %%u[%u] %%x[%x]\n", UINT_MAX, UINT_MAX);
     std_len = printf("printf:    %%u[%u] %%x[%x]\n", UINT_MAX, UINT_MAX);
-    compare_length(ft_len, std_len, "大きな値");
+    compare_length(ft_len, std_len, "大きな値", "ft_printf: %%u[%u] %%x[%x]\n");
 }
 
 // 特殊な文字列テスト
@@ -238,7 +258,7 @@ void test_special_strings(void)
     printf("\n%s----- 特殊文字テスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%s]\n", "タブ\t改行\n特殊文字");
     std_len = printf("printf:    [%s]\n", "タブ\t改行\n特殊文字");
-    compare_length(ft_len, std_len, "特殊文字");
+    compare_length(ft_len, std_len, "特殊文字", "ft_printf: [%s]\n");
 }
 
 // 複数の連続変換指定子テスト
@@ -251,12 +271,12 @@ void test_consecutive_specifiers(void)
     printf("\n%s----- 連続指定子テスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: %d%s%c\n", 42, "test", '!');
     std_len = printf("printf:    %d%s%c\n", 42, "test", '!');
-    compare_length(ft_len, std_len, "連続指定子");
+    compare_length(ft_len, std_len, "連続指定子", "ft_printf: %d%s%c\n");
     
     printf("\n%s----- 同一指定子連続テスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: %c%c%c%c\n", 'a', 'b', 'c', 'd');
     std_len = printf("printf:    %c%c%c%c\n", 'a', 'b', 'c', 'd');
-    compare_length(ft_len, std_len, "同一指定子連続");
+    compare_length(ft_len, std_len, "同一指定子連続", "ft_printf: %c%c%c%c\n");
 }
 
 // 境界値テスト
@@ -270,20 +290,20 @@ void test_boundary_cases(void)
     printf("\n%s----- 指定子のみテスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: %d\n", 42);
     std_len = printf("printf:    %d\n", 42);
-    compare_length(ft_len, std_len, "指定子のみ");
+    compare_length(ft_len, std_len, "指定子のみ", "ft_printf: %d\n");
     
     // 空文字列フォーマット
     printf("\n%s----- 空文字列フォーマットテスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("");
     std_len = printf("");
-    compare_length(ft_len, std_len, "空文字列フォーマット");
+    compare_length(ft_len, std_len, "空文字列フォーマット", "");
     
     // 末尾%
     printf("\n%s----- 末尾%%テスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: Test%");
     std_len = printf("printf:    Test%");
     printf("\n");  // 改行を追加
-    compare_length(ft_len, std_len, "末尾%");
+    compare_length(ft_len, std_len, "末尾%", "ft_printf: Test%");
 }
 
 // エラー処理テスト (ft_printfによっては実装が異なる)
@@ -298,13 +318,13 @@ void test_error_handling(void)
     printf("※ このテストはft_printfの実装により結果が異なる場合があります\n");
     ft_len = ft_printf("ft_printf: %z\n");
     std_len = printf("printf:    %z\n");
-    compare_length(ft_len, std_len, "未知の指定子");
+    compare_length(ft_len, std_len, "未知の指定子", "ft_printf: %z\n");
     // 認識されないフォーマット指定子
     printf("\n%s----- 未知の指定子テスト ver2 -----%s\n", YELLOW, RESET);
     printf("※ このテストはft_printfの実装により結果が異なる場合があります\n");
-    ft_len = ft_printf("ft_printf: %q\n");
-    std_len = printf("printf:    %q\n");
-    compare_length(ft_len, std_len, "未知の指定子");
+    ft_len = ft_printf("ft_printf: %q%%\n");
+    std_len = printf("printf:    %q%%\n");
+    compare_length(ft_len, std_len, "未知の指定子", "ft_printf: %q\n");
 }
 
 // ボーナス: フラグと幅/精度の組み合わせテスト
@@ -318,37 +338,37 @@ void test_bonus_flags_width_precision(void)
     printf("\n%s----- 最小フィールド幅テスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%5d] [%10s]\n", 42, "hello");
     std_len = printf("printf:    [%5d] [%10s]\n", 42, "hello");
-    compare_length(ft_len, std_len, "最小フィールド幅");
+    compare_length(ft_len, std_len, "最小フィールド幅", "ft_printf: [%5d] [%10s]\n");
     
     // 左揃えフラグ (-) テスト
     printf("\n%s----- 左揃えフラグテスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%-5d] [%-10s]\n", 42, "hello");
     std_len = printf("printf:    [%-5d] [%-10s]\n", 42, "hello");
-    compare_length(ft_len, std_len, "左揃えフラグ");
+    compare_length(ft_len, std_len, "左揃えフラグ", "ft_printf: [%-5d] [%-10s]\n");
     
     // ゼロパディング (0) テスト
     printf("\n%s----- ゼロパディングテスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%05d] [%010d]\n", 42, -42);
     std_len = printf("printf:    [%05d] [%010d]\n", 42, -42);
-    compare_length(ft_len, std_len, "ゼロパディング");
+    compare_length(ft_len, std_len, "ゼロパディング", "ft_printf: [%05d] [%010d]\n");
     
     // 精度指定子 (.) テスト
     printf("\n%s----- 精度指定子テスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%.3d] [%.5s]\n", 42, "hello");
     std_len = printf("printf:    [%.3d] [%.5s]\n", 42, "hello");
-    compare_length(ft_len, std_len, "精度指定子");
+    compare_length(ft_len, std_len, "精度指定子", "ft_printf: [%.3d] [%.5s]\n");
     
     // 幅と精度の組み合わせテスト
     printf("\n%s----- 幅と精度の組み合わせテスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%8.3d] [%10.5s]\n", 42, "hello");
     std_len = printf("printf:    [%8.3d] [%10.5s]\n", 42, "hello");
-    compare_length(ft_len, std_len, "幅と精度");
+    compare_length(ft_len, std_len, "幅と精度", "ft_printf: [%8.3d] [%10.5s]\n");
     
     // 複雑な組み合わせテスト
     printf("\n%s----- 複雑な組み合わせテスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%-8.3d] [%08.5d] [%-10.7s]\n", 42, 42, "hello");
     std_len = printf("printf:    [%-8.3d] [%08.5d] [%-10.7s]\n", 42, 42, "hello");
-    compare_length(ft_len, std_len, "複雑な組み合わせ");
+    compare_length(ft_len, std_len, "複雑な組み合わせ", "ft_printf: [%-8.3d] [%08.5d] [%-10.7s]\n");
 }
 
 // ボーナス: 特殊フラグ (# +) のテスト
@@ -362,48 +382,48 @@ void test_bonus_special_flags(void)
     printf("\n%s----- # フラグテスト (16進数) -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%#x] [%#X]\n", 42, 42);
     std_len = printf("printf:    [%#x] [%#X]\n", 42, 42);
-    compare_length(ft_len, std_len, "# フラグ (16進数)");
+    compare_length(ft_len, std_len, "# フラグ (16進数)", "ft_printf: [%#x] [%#X]\n");
     
     // # フラグテスト (0値)
     printf("\n%s----- # フラグテスト (0値) -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%#x] [%#X]\n", 0, 0);
     std_len = printf("printf:    [%#x] [%#X]\n", 0, 0);
-    compare_length(ft_len, std_len, "# フラグ (0値)");
+    compare_length(ft_len, std_len, "# フラグ (0値)", "ft_printf: [%#x] [%#X]\n");
     
     // + フラグテスト
     printf("\n%s----- + フラグテスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%+d] [%+i]\n", 42, -42);
     std_len = printf("printf:    [%+d] [%+i]\n", 42, -42);
-    compare_length(ft_len, std_len, "+ フラグ");
+    compare_length(ft_len, std_len, "+ フラグ", "ft_printf: [%+d] [%+i]\n");
     
     // スペースフラグテスト
     printf("\n%s----- スペースフラグテスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [% d] [% i]\n", 42, -42);
     std_len = printf("printf:    [% d] [% i]\n", 42, -42);
-    compare_length(ft_len, std_len, "スペースフラグ");
+    compare_length(ft_len, std_len, "スペースフラグ", "ft_printf: [% d] [% i]\n");
     
     // フラグの優先順位テスト (+ と スペース)
     printf("\n%s----- フラグ優先順位テスト (+ とスペース) -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%+ d] [% +i]\n", 42, 42);
     std_len = printf("printf:    [%+ d] [% +i]\n", 42, 42);
-    compare_length(ft_len, std_len, "+ とスペース");
+    compare_length(ft_len, std_len, "+ とスペース", "ft_printf: [%+ d] [% +i]\n");
     
     // 複合フラグテスト
     printf("\n%s----- 複合フラグテスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%+8d] [% 8d] [%#8x]\n", 42, 42, 42);
     std_len = printf("printf:    [%+8d] [% 8d] [%#8x]\n", 42, 42, 42);
-    compare_length(ft_len, std_len, "複合フラグ");
+    compare_length(ft_len, std_len, "複合フラグ", "ft_printf: [%+8d] [% 8d] [%#8x]\n");
     
     // すべてのフラグの組み合わせテスト
     printf("\n%s----- すべてのフラグ組み合わせテスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%+-8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     std_len = printf("printf:    [%+-8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
-    compare_length(ft_len, std_len, "すべてのフラグ");
+    compare_length(ft_len, std_len, "すべてのフラグ", "ft_printf: [%+-8.3d] [%+08.5d] [%#-8.3x]\n");
     // すべてのフラグの組み合わせテスト
     printf("\n%s----- すべてのフラグ組み合わせテスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%+-\n8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     std_len = printf("printf:    [%+-\n8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
-    compare_length(ft_len, std_len, "すべてのフラグ");
+    compare_length(ft_len, std_len, "すべてのフラグ", "ft_printf: [%+-\n8.3d] [%+08.5d] [%#-8.3x]\n");
 }
 
 int main(void)

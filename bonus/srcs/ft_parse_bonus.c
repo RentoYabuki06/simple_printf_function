@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 16:34:13 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 18:35:25 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 19:59:38 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static bool ft_is_specifier(char c)
 	if (c == 'p')
 		return (true);
 	if (c == 'd')
+		return (true);
+	if (c == 'i')
 		return (true);
 	if (c == 'u')
 		return (true);
@@ -81,20 +83,30 @@ int	ft_parse_format(char *format, t_option *option)
 
 	i = 0;
 	option->precision = -1;
+	option->alternative_form = false;
+	option->is_space = false;
+	option->left_aligned = false;
+	option->width = 0;
 	while (ft_is_flag(format[i]) == true)
 		ft_set_flag(format[i++], option);
 	if (ft_isdigit(format[i]) == true)
+	{
 		option->width = ft_atoi(&format[i]);
-	i += ft_len_num(option->width);
+		i += ft_len_num(option->width);
+	}
 	if (option->width > 0)
 		option->left_aligned = false;
 	if (option->show_plus == true)
 		option->is_space = false;
-	if (option->left_aligned == true || option->precision == true)
+	if (option->left_aligned == true || option->precision != -1)
 		option->zero_padding = false;
 	if (format[i] == '.')
+	{
 		option->precision = ft_atoi(&format[++i]);
-	i += ft_len_num(option->precision);
+		i += ft_len_num(option->precision);
+	}
+	if (format[i] == '\0')
+		return (-2);
 	if (ft_is_specifier(format[i]) == false)
 		return (-1);
 	option->specifier = format[i];

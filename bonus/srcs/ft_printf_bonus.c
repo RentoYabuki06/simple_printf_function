@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:36:02 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 18:50:22 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 19:43:45 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,21 @@ int	ft_printf(const char *format, ...)
 			if (parse_len == -1)
 			{
 				write(STDOUT_FILENO, "%", 1);
+				len_total_len++;
+				i++;
+				continue;
+			}
+			else if (parse_len == -2)
+			{
 				len_total_len = -1;
-				break;
+				break ;
 			}
 			len_tmp = ft_print_format_bonus(&args, &option);
 			i += parse_len;
 		}
 		else
 			len_tmp = ft_put_char(tmp_format[i]);
-		if (len_tmp < 0)
+		if (len_tmp == -1)
 		{
 			len_total_len = -1;
 			break;

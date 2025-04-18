@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:35 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 18:36:57 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 20:07:42 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_hex_len_bonus(unsigned long long num)
 	int	len;
 
 	len = 0;
+	if (num == 0)
+		return (1);
 	while (num != 0)
 	{
 		len++;
@@ -58,21 +60,51 @@ int	ft_print_hex_bonus(unsigned int num, char format, t_option *option)
 	width = (*option).width;
 	total_len = width;
 	num_len = ft_hex_len_bonus(num);
+	if (num != 0 && (*option).alternative_form == true)
+		num_len += 2;
 	if (num_len > width)
 		total_len = num_len;
-	if (num == 0)
-		return (ft_put_char('0'));
 	if ((*option).left_aligned == true)
 	{
-		if (ft_put_hex_bonus(num, format == 'x') < 0)
-			return (-1);
+		if (num == 0)
+		{
+			if (write(STDOUT_FILENO, "0", 1) < 0)
+				return (-1);
+		}
+		else
+		{
+			if ((*option).alternative_form == true)
+			{		
+				if (format == 'x' && write(STDOUT_FILENO, "0x", 2) < 0)
+					return (-1);
+				if (format == 'X' && write(STDOUT_FILENO, "0X", 2) < 0)
+					return (-1);
+			}
+			if (num != 0 && ft_put_hex_bonus(num, format == 'x') < 0)
+				return (-1);
+		}
 	}
 	if (ft_put_space_or_zero(width, num_len, option) < 0)
 		return (-1);
 	if ((*option).left_aligned == false)
 	{
-		if (ft_put_hex_bonus(num, format == 'x') < 0)
-			return (-1);
+		if (num == 0)
+		{
+			if (write(STDOUT_FILENO, "0", 1) < 0)
+				return (-1);
+		}
+		else
+		{
+			if ((*option).alternative_form == true)
+			{		
+				if (format == 'x' && write(STDOUT_FILENO, "0x", 2) < 0)
+					return (-1);
+				if (format == 'X' && write(STDOUT_FILENO, "0X", 2) < 0)
+					return (-1);
+			}
+			if (num != 0 && ft_put_hex_bonus(num, format == 'x') < 0)
+				return (-1);
+		}
 	}
 	return (total_len);
 }

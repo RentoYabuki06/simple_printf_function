@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:52 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 19:02:45 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 19:32:31 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ int	ft_print_percent_bonus(t_option *option)
 		if (write(STDOUT_FILENO, "%", 1) < 0)
 			return (-1);
 	}
-	return (width);
+	if (width > 0)
+		return (width);
+	return (1);
 }

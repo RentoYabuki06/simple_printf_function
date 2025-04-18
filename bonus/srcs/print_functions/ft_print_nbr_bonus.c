@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:45 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 18:38:23 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 19:31:08 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	ft_num_len_bonus(int num, bool is_negative)
 	len = 0;
 	if (is_negative == true)
 		len++;
+	if (num == 0)
+		return (len + 1);
 	while (num != 0)
 	{
 		len++;
@@ -52,7 +54,6 @@ static int	ft_len_print_num_bonus(int num, t_option *option)
 	{
 		num *= -1;
 		is_negative = true;
-		total_len++;
 	}
 	if (is_negative == false && ((*option).show_plus == true || (*option).is_space == true))
 		total_len++;
@@ -60,12 +61,12 @@ static int	ft_len_print_num_bonus(int num, t_option *option)
 	return (total_len);
 }
 
-static int	ft_print_number(int num, t_option *option)
+static int	ft_print_number(int num, int num_len, t_option *option)
 {
 	bool	is_negative;
 	int 	total_len;
 
-	total_len = ft_len_print_num_bonus(num, option);
+	total_len = num_len;
 	is_negative = false;
 	if (num < 0)
 	{
@@ -109,14 +110,14 @@ int	ft_print_nbr_bonus(int num, t_option *option)
 		total_len = num_len;
 	if ((*option).left_aligned == true)
 	{
-		if (ft_print_number(num, option) < 0)
+		if (ft_print_number(num, num_len, option) < 0)
 			return (-1);
 	}
 	if (ft_put_space_or_zero(width, num_len, option) < 0)
 		return (-1);
 	if ((*option).left_aligned == false)
 	{
-		if (ft_print_number(num, option) < 0)
+		if (ft_print_number(num, num_len, option) < 0)
 			return (-1);
 	}
 	return (total_len);
