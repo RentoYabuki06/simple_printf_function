@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
+/*   ft_print_nbr_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:45 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 14:38:48 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 16:39:18 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	ft_put_nbr(int num)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_print_nbr(int num)
+int	ft_print_nbr_bonus(int num, t_option *option)
 {
 	bool	is_negative;
 

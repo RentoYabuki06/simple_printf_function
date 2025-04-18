@@ -6,7 +6,7 @@
 #    By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:59:44 by yabukirento       #+#    #+#              #
-#    Updated: 2025/04/18 15:17:51 by yabukirento      ###   ########.fr        #
+#    Updated: 2025/04/18 17:07:07 by yabukirento      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,13 +25,20 @@ SRCS =	srcs/ft_printf.c \
 		srcs/print_functions/ft_print_str.c
 
 SRCS_BONUS =	bonus/srcs/ft_printf_bonus.c \
+				bonus/srcs/ft_parse_bonus.c \
 				bonus/srcs/print_functions/ft_print_hex_bonus.c \
 				bonus/srcs/print_functions/ft_print_percent_bonus.c \
 				bonus/srcs/print_functions/ft_print_unsigned_bonus.c \
 				bonus/srcs/print_functions/ft_print_char_bonus.c \
 				bonus/srcs/print_functions/ft_print_nbr_bonus.c \
 				bonus/srcs/print_functions/ft_print_ptr_bonus.c \
-				bonus/srcs/print_functions/ft_print_str_bonus.c
+				bonus/srcs/print_functions/ft_print_str_bonus.c \
+				bonus/srcs/utils/ft_strdup_bonus.c \
+				bonus/srcs/utils/ft_strlen_bonus.c \
+				bonus/srcs/utils/ft_bzero_bonus.c \
+				bonus/srcs/utils/ft_isdigit_bonus.c \
+				bonus/srcs/utils/ft_atoi_bonus.c \
+				bonus/srcs/utils/ft_put_space_bonus.c \
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)

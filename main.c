@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:20:00 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 15:20:59 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 15:31:22 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -397,6 +397,11 @@ void test_bonus_special_flags(void)
     printf("\n%s----- すべてのフラグ組み合わせテスト -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%+-8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     std_len = printf("printf:    [%+-8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
+    compare_length(ft_len, std_len, "すべてのフラグ");
+    // すべてのフラグの組み合わせテスト
+    printf("\n%s----- すべてのフラグ組み合わせテスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%+-\n8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
+    std_len = printf("printf:    [%+-\n8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     compare_length(ft_len, std_len, "すべてのフラグ");
 }
 

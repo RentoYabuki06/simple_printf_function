@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*   ft_print_unsigned_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:39:10 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 14:39:13 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 16:41:36 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ static int	ft_put_unsiged_int(unsigned int num)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_print_unsigned(unsigned int num)
+int	ft_print_unsigned_bonus(unsigned int num, t_option *option)
 {
+	(void)	option;
 	if (num == 0)
 		return (ft_print_char('0'));
 	if (ft_put_unsiged_int(num) < 0)

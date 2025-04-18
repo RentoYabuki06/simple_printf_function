@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_char_bonus.c                              :+:      :+:    :+:   */
+/*   ft_strdup_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 14:38:28 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 17:19:56 by yabukirento      ###   ########.fr       */
+/*   Created: 2025/04/18 15:38:52 by yabukirento       #+#    #+#             */
+/*   Updated: 2025/04/18 15:38:54 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-int	ft_print_char_bonus(int a, t_option *option)
+static char	*ft_strndup(const char *src, size_t n)
 {
-	int	width;
+	size_t		i;
+	size_t		len;
+	char		*dest;
 
-	width = (*option).width;
-	if ((*option).left_aligned == true)
+	len = ft_strlen(src);
+	if (len > n)
+		len = n;
+	dest = (char *)malloc((len + 1) * sizeof(char));
+	if (dest == NULL)
+		return (NULL);
+	i = 0;
+	while (i < len)
 	{
-		if (write(STDOUT_FILENO, &a, 1) < 0)
-			return (-1);
+		dest[i] = src[i];
+		i++;
 	}
-	if (width > 1)
-	{
-		if(ft_put_space_or_zero(width - 1, option) < 0)
-			return (-1);
-	}
-	if ((*option).left_aligned == false)
-	{
-		if (write(STDOUT_FILENO, &a, 1) < 0)
-			return (-1);
-	}
-	return (width);
+	dest[i] = '\0';
+	return (dest);
+}
+
+char	*ft_strdup(const char *src)
+{
+	return (ft_strndup(src, ft_strlen(src)));
 }
