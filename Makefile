@@ -6,7 +6,7 @@
 #    By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:59:44 by yabukirento       #+#    #+#              #
-#    Updated: 2025/04/18 15:07:17 by yabukirento      ###   ########.fr        #
+#    Updated: 2025/04/18 15:17:51 by yabukirento      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,19 +65,37 @@ fclean: clean
 
 re: fclean all
 
+# テストターゲットの修正・追加
+
+# 通常版テスト（既存）
 test: $(NAME)
 	$(CC) $(INCLUDES) -o test_printf main.c -L. -lftprintf
 	./test_printf
 	$(RM) test_printf
-	@echo "テストが完了しました。"
+	@echo "Standard version test completed."
 
+# ボーナス版テスト（新規追加）
+test_bonus: bonus
+	$(CC) $(INCLUDES_BONUS) -o test_bonus main.c -L. -lftprintf
+	./test_bonus
+	$(RM) test_bonus
+	@echo "Bonus version test completed."
+
+# 全テスト（新規追加）
+test_all: clean all test fclean bonus test_bonus
+	@echo "All tests completed."
+
+# ヘルプメッセージの更新
 help:
-	@echo "使用可能なターゲット:"
-	@echo "  all     : ライブラリをビルド"
-	@echo "  clean   : オブジェクトファイルを削除"
-	@echo "  fclean  : オブジェクトファイルとライブラリを削除"
-	@echo "  re      : 全てを再ビルド"
-	@echo "  test    : テストを実行"
-	@echo "  help    : このヘルプメッセージを表示"
+	@echo "Available targets:"
+	@echo "  all       : Build standard library"
+	@echo "  bonus     : Build bonus library"
+	@echo "  clean     : Remove object files"
+	@echo "  fclean    : Remove object files and libraries"
+	@echo "  re        : Rebuild everything"
+	@echo "  test      : Run tests on standard version"
+	@echo "  test_bonus: Run tests on bonus version"
+	@echo "  test_all  : Test both standard and bonus versions"
+	@echo "  help      : Display this help message"
 
-.PHONY: all clean fclean re test help
+.PHONY: all bonus clean fclean re test test_bonus test_all help

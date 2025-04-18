@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:20:00 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 13:22:34 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 15:20:59 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,7 +306,100 @@ void test_error_handling(void)
     compare_length(ft_len, std_len, "未知の指定子");
 }
 
-// メイン関数内の呼び出し追加
+// ボーナス: フラグと幅/精度の組み合わせテスト
+void test_bonus_flags_width_precision(void)
+{
+    int ft_len, std_len;
+    
+    printf("\n%s===== ボーナス: フラグと幅/精度のテスト =====%s\n", BLUE, RESET);
+    
+    // 最小フィールド幅のテスト
+    printf("\n%s----- 最小フィールド幅テスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%5d] [%10s]\n", 42, "hello");
+    std_len = printf("printf:    [%5d] [%10s]\n", 42, "hello");
+    compare_length(ft_len, std_len, "最小フィールド幅");
+    
+    // 左揃えフラグ (-) テスト
+    printf("\n%s----- 左揃えフラグテスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%-5d] [%-10s]\n", 42, "hello");
+    std_len = printf("printf:    [%-5d] [%-10s]\n", 42, "hello");
+    compare_length(ft_len, std_len, "左揃えフラグ");
+    
+    // ゼロパディング (0) テスト
+    printf("\n%s----- ゼロパディングテスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%05d] [%010d]\n", 42, -42);
+    std_len = printf("printf:    [%05d] [%010d]\n", 42, -42);
+    compare_length(ft_len, std_len, "ゼロパディング");
+    
+    // 精度指定子 (.) テスト
+    printf("\n%s----- 精度指定子テスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%.3d] [%.5s]\n", 42, "hello");
+    std_len = printf("printf:    [%.3d] [%.5s]\n", 42, "hello");
+    compare_length(ft_len, std_len, "精度指定子");
+    
+    // 幅と精度の組み合わせテスト
+    printf("\n%s----- 幅と精度の組み合わせテスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%8.3d] [%10.5s]\n", 42, "hello");
+    std_len = printf("printf:    [%8.3d] [%10.5s]\n", 42, "hello");
+    compare_length(ft_len, std_len, "幅と精度");
+    
+    // 複雑な組み合わせテスト
+    printf("\n%s----- 複雑な組み合わせテスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%-8.3d] [%08.5d] [%-10.7s]\n", 42, 42, "hello");
+    std_len = printf("printf:    [%-8.3d] [%08.5d] [%-10.7s]\n", 42, 42, "hello");
+    compare_length(ft_len, std_len, "複雑な組み合わせ");
+}
+
+// ボーナス: 特殊フラグ (# +) のテスト
+void test_bonus_special_flags(void)
+{
+    int ft_len, std_len;
+    
+    printf("\n%s===== ボーナス: 特殊フラグ (# +) のテスト =====%s\n", BLUE, RESET);
+    
+    // # フラグテスト (16進数)
+    printf("\n%s----- # フラグテスト (16進数) -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%#x] [%#X]\n", 42, 42);
+    std_len = printf("printf:    [%#x] [%#X]\n", 42, 42);
+    compare_length(ft_len, std_len, "# フラグ (16進数)");
+    
+    // # フラグテスト (0値)
+    printf("\n%s----- # フラグテスト (0値) -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%#x] [%#X]\n", 0, 0);
+    std_len = printf("printf:    [%#x] [%#X]\n", 0, 0);
+    compare_length(ft_len, std_len, "# フラグ (0値)");
+    
+    // + フラグテスト
+    printf("\n%s----- + フラグテスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%+d] [%+i]\n", 42, -42);
+    std_len = printf("printf:    [%+d] [%+i]\n", 42, -42);
+    compare_length(ft_len, std_len, "+ フラグ");
+    
+    // スペースフラグテスト
+    printf("\n%s----- スペースフラグテスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [% d] [% i]\n", 42, -42);
+    std_len = printf("printf:    [% d] [% i]\n", 42, -42);
+    compare_length(ft_len, std_len, "スペースフラグ");
+    
+    // フラグの優先順位テスト (+ と スペース)
+    printf("\n%s----- フラグ優先順位テスト (+ とスペース) -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%+ d] [% +i]\n", 42, 42);
+    std_len = printf("printf:    [%+ d] [% +i]\n", 42, 42);
+    compare_length(ft_len, std_len, "+ とスペース");
+    
+    // 複合フラグテスト
+    printf("\n%s----- 複合フラグテスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%+8d] [% 8d] [%#8x]\n", 42, 42, 42);
+    std_len = printf("printf:    [%+8d] [% 8d] [%#8x]\n", 42, 42, 42);
+    compare_length(ft_len, std_len, "複合フラグ");
+    
+    // すべてのフラグの組み合わせテスト
+    printf("\n%s----- すべてのフラグ組み合わせテスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%+-8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
+    std_len = printf("printf:    [%+-8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
+    compare_length(ft_len, std_len, "すべてのフラグ");
+}
+
 int main(void)
 {
     printf("\n%s***** ft_printf テストプログラム *****%s\n", BLUE, RESET);
@@ -322,6 +415,12 @@ int main(void)
     test_consecutive_specifiers();
     test_boundary_cases();
     test_error_handling();
+    
+    // ボーナステスト (ボーナス版でのみ成功します)
+    printf("\n%s***** ボーナス機能テスト *****%s\n", BLUE, RESET);
+    printf("%s注意: 以下のテストはボーナス版でのみ正常に動作します。%s\n", YELLOW, RESET);
+    test_bonus_flags_width_precision();
+    test_bonus_special_flags();
     
     print_summary();
     
