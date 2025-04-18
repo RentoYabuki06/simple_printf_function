@@ -12,27 +12,20 @@
 
 #include "ft_printf.h"
 
-int	ft_printptr(unsigned long long a)
+int	ft_print_ptr(unsigned long long ptr)
 {
 	int	len_str;
 
-	len_str = 0;
-	if (0 <= write(1, "0x", 2))
-		len_str += 2;
-	else
+	if (ptr == 0)
+		return (ft_print_str("(nil)"));
+	len_str = write(STDOUT_FILENO, "0x", 2);
+	if (len_str == -1)
 		return (-1);
-	if (a == 0)
-	{
-		if (0 <= write(1, "0", 1))
-			len_str++;
-		else
-			return (-1);
-	}
 	else
 	{
-		if (0 > ft_put_hex(a, 1))
+		if (ft_put_hex(ptr, true) < 0)
 			return (-1);
-		len_str += ft_hex_len(a);
+		len_str += ft_hex_len(ptr);
 	}
 	return (len_str);
 }

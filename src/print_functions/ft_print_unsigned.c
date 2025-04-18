@@ -6,21 +6,45 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:52:58 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/05/04 15:53:27 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 12:46:16 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_unsigned(unsigned int a)
-{
-	int		count;
-	char	*tmp;
 
-	tmp = ft_uitoa(a);
-	if (!tmp)
+static int	ft_len_unsigned_int(unsigned int num)
+{
+	int	len;
+
+	len = 0;
+	while (num != 0)
+	{
+		len++;
+		num /= 10;
+	}
+	return (len);
+}
+
+static int	ft_put_unsiged_int(unsigned int num)
+{
+	if (num >= 10)
+	{
+		if (ft_put_unsiged_int(num / 10) < 0)
+			return (-1);
+		if (ft_put_unsiged_int(num % 10) < 0)
+			return (-1);
+	}
+	else
+		return (ft_print_char('0' + num));
+	return (EXIT_SUCCESS);
+}
+
+int	ft_print_unsigned(unsigned int num)
+{
+	if (num == 0)
+		return (ft_print_char('0'));
+	if (ft_put_unsiged_int(num) < 0)
 		return (-1);
-	count = ft_printstr(tmp);
-	free(tmp);
-	return (count);
+	return (ft_len_unsigned_int(num));
 }

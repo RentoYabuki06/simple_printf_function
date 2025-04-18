@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printstr.c                                      :+:      :+:    :+:   */
+/*   ft_print_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -22,9 +22,9 @@ static size_t	ft_strlen(const char *str)
 	return (count);
 }
 
-int	ft_printstr(const char *str)
+int	ft_print_str(const char *str)
 {
 	if (!str)
-		return (write(1, "(null)", 6));
-	return (write(1, str, ft_strlen(str)));
+		return (write(STDOUT_FILENO, "(null)", 6));
+	return (write(STDOUT_FILENO, str, ft_strlen(str)));
 }

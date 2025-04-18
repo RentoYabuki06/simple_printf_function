@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printchar.c                                     :+:      :+:    :+:   */
+/*   ft_print_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:22:37 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/05/04 17:23:32 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 12:16:15 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printchar(int a)
+int	ft_print_char(int a)
 {
-	if (write(1, &a, 1) == 1)
-		return (1);
-	else
-		return (-1);
+	return (write(STDOUT_FILENO, &a, 1));
 }

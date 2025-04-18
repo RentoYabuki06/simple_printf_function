@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:04:41 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/05/04 15:55:12 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 12:27:03 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,48 +20,40 @@ int	ft_hex_len(unsigned long long num)
 	while (num != 0)
 	{
 		len++;
-		num = num / 16;
+		num /= 16;
 	}
 	return (len);
 }
 
-int	ft_put_hex(unsigned long long num, int is_lower)
+int	ft_put_hex(unsigned long long num, bool is_lower)
 {
-	char	c;
-
 	if (num >= 16)
 	{
-		if (0 > ft_put_hex(num / 16, is_lower) || 0 > ft_put_hex(num % 16,
-				is_lower))
+		if (ft_put_hex(num / 16, is_lower) < 0)
+			return (-1);
+		if (ft_put_hex(num % 16, is_lower) < 0)
 			return (-1);
 	}
 	else
 	{
 		if (num <= 9)
-			c = num + '0';
+			return (ft_print_char('0' + num));
 		else
 		{
-			if (is_lower)
-				c = (num - 10 + 'a');
+			if (is_lower == true)
+				return (ft_print_char('a' + num - 10));
 			else
-				c = (num - 10 + 'A');
+				return (ft_print_char('A' + num - 10));
 		}
-		return (ft_printchar(c));
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	ft_print_hex(unsigned int nbr, char format)
 {
-	int	count;
-
 	if (nbr == 0)
-		return (write(1, "0", 1));
-	else
-	{
-		if (0 > ft_put_hex(nbr, format == 'x'))
-			return (-1);
-		count = ft_hex_len(nbr);
-	}
-	return (count);
+		return (write(STDOUT_FILENO, "0", 1));
+	if (0 > ft_put_hex(nbr, format == 'x'))
+		return (-1);
+	return(ft_hex_len(nbr));
 }

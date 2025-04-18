@@ -6,7 +6,7 @@
 #    By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:59:44 by yabukirento       #+#    #+#              #
-#    Updated: 2025/03/31 18:11:42 by yabukirento      ###   ########.fr        #
+#    Updated: 2025/04/18 13:19:13 by yabukirento      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ INCLUDES = -I./includes
 
 SRC_DIR = src
 PRINT_FUNC_DIR = $(SRC_DIR)/print_functions
-UTILS_DIR = $(SRC_DIR)/utils
 
 PRINT_SRCS = $(addprefix $(PRINT_FUNC_DIR)/, \
 	ft_print_hex.c \
@@ -27,18 +26,14 @@ PRINT_SRCS = $(addprefix $(PRINT_FUNC_DIR)/, \
 	ft_print_ptr.c \
 	ft_print_str.c)
 
-UTILS_SRCS = $(addprefix $(UTILS_DIR)/, \
-	ft_itoa.c \
-	ft_strdup.c)
-
 MAIN_SRCS = $(addprefix $(SRC_DIR)/, \
 	ft_printf.c)
 
-SRCS = $(PRINT_SRCS) $(UTILS_SRCS) $(MAIN_SRCS)
+SRCS = $(PRINT_SRCS) $(MAIN_SRCS)
 
 OBJS = $(SRCS:.c=.o)
 
-NAME = libftprintf.aa
+NAME = libftprintf.a
 
 all: $(NAME)
 
@@ -57,4 +52,19 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+test: $(NAME)
+	$(CC) $(INCLUDES) -o test_printf main.c -L. -lftprintf
+	./test_printf
+	$(RM) test_printf
+	@echo "テストが完了しました。"
+
+help:
+	@echo "使用可能なターゲット:"
+	@echo "  all     : ライブラリをビルド"
+	@echo "  clean   : オブジェクトファイルを削除"
+	@echo "  fclean  : オブジェクトファイルとライブラリを削除"
+	@echo "  re      : 全てを再ビルド"
+	@echo "  test    : テストを実行"
+	@echo "  help    : このヘルプメッセージを表示"
+
+.PHONY: all clean fclean re test help

@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:33:41 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/05/03 15:38:54 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 12:35:13 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int	ft_print_percent(void)
 {
-	return (write(1, "%", 1));
+	return (write(STDOUT_FILENO, "%", 1));
 }

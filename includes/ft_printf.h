@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:59:11 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/03/31 18:06:22 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 13:02:09 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,19 @@
 # include <stddef.h>
 # include <stdarg.h>
 # include <stdlib.h>
-# include <stdio.h>
+# include <stdbool.h>
 
-char	*ft_itoa(int n);
-char	*ft_uitoa(unsigned int n);
-int		ft_printchar(int a);
-int		ft_printstr(const char *str);
 int		ft_printf(const char *format, ...);
+
+/* print_functions */
+int		ft_print_char(int a);
+int		ft_print_str(const char *str);
 int		ft_print_percent(void);
-int		ft_printptr(unsigned long long a);
-int		ft_printnbr(int a);
+int		ft_print_ptr(unsigned long long a);
+int		ft_print_nbr(int a);
 int		ft_print_hex(unsigned int nbr, char format);
-char	*ft_strdup(const char *src);
-int		ft_print_unsigned(unsigned int a);
-int		ft_put_hex(unsigned long long num, int is_lower);
+int		ft_print_unsigned(unsigned int num);
+int		ft_put_hex(unsigned long long num, bool is_lower);
 int		ft_hex_len(unsigned long long num);
 
 #endif
