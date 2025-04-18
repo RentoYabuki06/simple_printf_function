@@ -6,46 +6,59 @@
 #    By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:59:44 by yabukirento       #+#    #+#              #
-#    Updated: 2025/04/18 13:19:13 by yabukirento      ###   ########.fr        #
+#    Updated: 2025/04/18 15:07:17 by yabukirento      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I./includes
+INCLUDES_BONUS = -I./bonus/includes
 
-SRC_DIR = src
-PRINT_FUNC_DIR = $(SRC_DIR)/print_functions
+SRCS =	srcs/ft_printf.c \
+		srcs/print_functions/ft_print_hex.c \
+		srcs/print_functions/ft_print_percent.c \
+		srcs/print_functions/ft_print_unsigned.c \
+		srcs/print_functions/ft_print_char.c \
+		srcs/print_functions/ft_print_nbr.c \
+		srcs/print_functions/ft_print_ptr.c \
+		srcs/print_functions/ft_print_str.c
 
-PRINT_SRCS = $(addprefix $(PRINT_FUNC_DIR)/, \
-	ft_print_hex.c \
-	ft_print_percent.c \
-	ft_print_unsigned.c \
-	ft_print_char.c \
-	ft_print_nbr.c \
-	ft_print_ptr.c \
-	ft_print_str.c)
-
-MAIN_SRCS = $(addprefix $(SRC_DIR)/, \
-	ft_printf.c)
-
-SRCS = $(PRINT_SRCS) $(MAIN_SRCS)
+SRCS_BONUS =	bonus/srcs/ft_printf_bonus.c \
+				bonus/srcs/print_functions/ft_print_hex_bonus.c \
+				bonus/srcs/print_functions/ft_print_percent_bonus.c \
+				bonus/srcs/print_functions/ft_print_unsigned_bonus.c \
+				bonus/srcs/print_functions/ft_print_char_bonus.c \
+				bonus/srcs/print_functions/ft_print_nbr_bonus.c \
+				bonus/srcs/print_functions/ft_print_ptr_bonus.c \
+				bonus/srcs/print_functions/ft_print_str_bonus.c
 
 OBJS = $(SRCS:.c=.o)
+OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 NAME = libftprintf.a
+BONS_NAME = libftprintf.a
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rc $@ $^
-	ranlib $@
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
 
-%.o: %.c
+srcs/%.o: srcs/%.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
+bonus: $(OBJS_BONUS)
+	ar rc $(NAME) $(OBJS_BONUS)
+	ranlib $(NAME)
+
+bonus/%.o: bonus/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INCLUDES_BONUS) -c $< -o $@
+
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
 	$(RM) $(NAME)
