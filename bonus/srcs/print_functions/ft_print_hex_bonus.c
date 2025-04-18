@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:35 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 20:07:42 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 22:55:08 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,33 @@ int	ft_print_hex_bonus(unsigned int num, char format, t_option *option)
 	int	width;
 	int	total_len;
 	int	num_len;
+	int	precision;
+	int	len_zero;
 
+	precision = (*option).precision;
 	width = (*option).width;
 	total_len = width;
 	num_len = ft_hex_len_bonus(num);
 	if (num != 0 && (*option).alternative_form == true)
 		num_len += 2;
-	if (num_len > width)
+	len_zero = precision - num_len;
+	if (len_zero < 0)
+		len_zero = 0;
+	if (width < num_len)
 		total_len = num_len;
+	if (total_len < precision)
+		total_len = precision;
 	if ((*option).left_aligned == true)
 	{
 		if (num == 0)
 		{
-			if (write(STDOUT_FILENO, "0", 1) < 0)
+			if (ft_put_zero(len_zero + 1) < 0)
 				return (-1);
 		}
 		else
 		{
+			if (ft_put_zero(len_zero) < 0)
+				return (-1);
 			if ((*option).alternative_form == true)
 			{		
 				if (format == 'x' && write(STDOUT_FILENO, "0x", 2) < 0)
@@ -90,11 +100,13 @@ int	ft_print_hex_bonus(unsigned int num, char format, t_option *option)
 	{
 		if (num == 0)
 		{
-			if (write(STDOUT_FILENO, "0", 1) < 0)
+			if (ft_put_zero(len_zero + 1) < 0)
 				return (-1);
 		}
 		else
 		{
+			if (ft_put_zero(len_zero) < 0)
+				return (-1);
 			if ((*option).alternative_form == true)
 			{		
 				if (format == 'x' && write(STDOUT_FILENO, "0x", 2) < 0)

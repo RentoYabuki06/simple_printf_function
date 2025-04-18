@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:39:10 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 18:37:37 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 22:54:11 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,51 @@ int	ft_print_unsigned_bonus(unsigned int num, t_option *option)
 	int	width;
 	int	total_len;
 	int	num_len;
+	int precision;
+	int len_zero;
 
+	precision = (*option).precision;
 	width = (*option).width;
 	total_len = width;
 	num_len = ft_len_unsigned_int_bonus(num);
-	if (num_len > width)
+	len_zero = precision - num_len;
+	if (len_zero < 0)
+		len_zero = 0;
+	if (width < num_len)
 		total_len = num_len;
-	if (num == 0)
-		return (ft_put_char('0'));
+	if (total_len < precision)
+		total_len = precision;
 	if ((*option).left_aligned == true)
 	{
-		if (ft_put_unsiged_int_bonus(num) < 0)
-			return (-1);
+		if (num == 0)
+		{
+			if (ft_put_zero(len_zero + 1) < 0)
+				return (-1);
+		}
+		else
+		{
+			if (ft_put_zero(len_zero) < 0)
+				return (-1);
+			if (ft_put_unsiged_int_bonus(num) < 0)
+				return (-1);
+		}
 	}
 	if (ft_put_space_or_zero(width, num_len, option) < 0)
 		return (-1);
 	if ((*option).left_aligned == false)
 	{
-		if (ft_put_unsiged_int_bonus(num) < 0)
-			return (-1);
+		if (num == 0)
+		{
+			if (ft_put_zero(len_zero + 1) < 0)
+				return (-1);
+		}
+		else
+		{
+			if (ft_put_zero(len_zero) < 0)
+				return (-1);
+			if (ft_put_unsiged_int_bonus(num) < 0)
+				return (-1);
+		}
 	}
 	return (total_len);
 }
