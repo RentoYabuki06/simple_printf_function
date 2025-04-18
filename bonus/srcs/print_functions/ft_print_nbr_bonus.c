@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:45 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 19:31:08 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 20:43:13 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static int	ft_len_print_num_bonus(int num, t_option *option)
 	int 	total_len;
 
 	total_len = 0;
+	if (num == 0)
+		return (1);
 	is_negative = false;
 	if (num < 0)
 	{
@@ -61,7 +63,7 @@ static int	ft_len_print_num_bonus(int num, t_option *option)
 	return (total_len);
 }
 
-static int	ft_print_number(int num, int num_len, t_option *option)
+static int	ft_print_number(int num, int num_len, int num_zero, t_option *option)
 {
 	bool	is_negative;
 	int 	total_len;
@@ -75,6 +77,8 @@ static int	ft_print_number(int num, int num_len, t_option *option)
 		if (ft_put_char('-') < 0)
 			return (-1);
 	}
+	if (ft_put_zero(num_zero) < 0)
+		return (-1);
 	if (is_negative == false)
 	{
 		if ((*option).show_plus == true)
@@ -98,26 +102,42 @@ int	ft_print_nbr_bonus(int num, t_option *option)
 	int 	total_len;
 	int 	num_len;
 	int		width;
+	int		precision;
+	int		len_zero;
 
+	precision = (*option).precision;
 	width = (*option).width;
 	total_len = width;
 	if (num == -2147483648)
 		return (ft_print_str_bonus("-2147483648", option));
-	if (num == 0)
-		return (ft_put_char('0'));
 	num_len = ft_len_print_num_bonus(num, option);
+	len_zero = precision - num_len;
+	if (len_zero < 0)
+		len_zero = 0;
 	if (num_len > width)
 		total_len = num_len;
+	if (total_len < precision)
+		total_len = precision;
 	if ((*option).left_aligned == true)
 	{
-		if (ft_print_number(num, num_len, option) < 0)
+		if (num == 0)
+		{
+			if (ft_put_zero(len_zero + 1) < 0)
+				return (-1);
+		}
+		else if (ft_print_number(num, num_len, len_zero, option) < 0)
 			return (-1);
 	}
-	if (ft_put_space_or_zero(width, num_len, option) < 0)
+	if (ft_put_space_or_zero(width, num_len + len_zero, option) < 0)
 		return (-1);
 	if ((*option).left_aligned == false)
 	{
-		if (ft_print_number(num, num_len, option) < 0)
+		if (num == 0)
+		{
+			if (ft_put_zero(len_zero + 1) < 0)
+				return (-1);
+		}
+		else if (ft_print_number(num, num_len, len_zero, option) < 0)
 			return (-1);
 	}
 	return (total_len);

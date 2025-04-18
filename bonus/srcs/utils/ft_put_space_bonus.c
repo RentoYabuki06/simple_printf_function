@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:06:42 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 18:03:14 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 20:39:12 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,15 @@ int	ft_put_space_or_zero(int width, int len, t_option *option)
 			return (-1);
 	}
 	return (width - len);
+}
+
+int	ft_put_zero(int len)
+{
+	while (len > 0)
+	{
+		len--;
+		if (write(STDOUT_FILENO, "0", 1) < 0)
+			return (-1);
+	}
+	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:36:12 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 19:01:38 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/18 20:39:16 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 int		ft_isdigit(int c);
 int		ft_put_char(char c);
+int		ft_put_zero(int len);
 int		ft_put_space_or_zero(int width, int len, t_option *option);
 char	*ft_strdup(const char *src);
 size_t	ft_strlen(const char *str);
