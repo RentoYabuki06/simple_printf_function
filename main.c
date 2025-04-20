@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:20:00 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 19:34:58 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/20 11:31:01 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -424,6 +424,67 @@ void test_bonus_special_flags(void)
     ft_len = ft_printf("ft_printf: [%+-\n8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     std_len = printf("printf:    [%+-\n8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     compare_length(ft_len, std_len, "すべてのフラグ", "ft_printf: [%+-\n8.3d] [%+08.5d] [%#-8.3x]\n");
+
+    // 1. 文字列精度（精度が文字列長を超える）
+    printf("\n%s----- 文字列精度10テスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%.10s]\n", "abc");
+    std_len = printf("printf:    [%.10s]\n", "abc");
+    compare_length(ft_len, std_len, "文字列精度10", "ft_printf: [%.10s]\n");
+
+    // 2. 幅＋精度（文字列）
+    printf("\n%s----- 幅8精度5 文字列テスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%8.5s]\n", "HelloWorld");
+    std_len = printf("printf:    [%8.5s]\n", "HelloWorld");
+    compare_length(ft_len, std_len, "幅8精度5 文字列", "ft_printf: [%8.5s]\n");
+
+    // 3. 幅のみ（整数）
+    printf("\n%s----- 幅5 整数テスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%5d]\n", 123);
+    std_len = printf("printf:    [%5d]\n", 123);
+    compare_length(ft_len, std_len, "幅5 整数", "ft_printf: [%5d]\n");
+
+    // 4. 幅＋精度（整数）
+    printf("\n%s----- 幅6精度4 整数テスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%6.4d]\n", 42);
+    std_len = printf("printf:    [%6.4d]\n", 42);
+    compare_length(ft_len, std_len, "幅6精度4 整数", "ft_printf: [%6.4d]\n");
+
+    // 5. 左揃えフラグ＋幅＋精度（整数）
+    printf("\n%s----- 左揃え 幅6精度4 テスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%-6.4d]\n", 42);
+    std_len = printf("printf:    [%-6.4d]\n", 42);
+    compare_length(ft_len, std_len, "左揃え 幅6精度4", "ft_printf: [%-6.4d]\n");
+
+    // 6. ゼロパディング＋精度（整数）
+    printf("\n%s----- ゼロパディング 幅6精度4 テスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%06.4d]\n", 42);
+    std_len = printf("printf:    [%06.4d]\n", 42);
+    compare_length(ft_len, std_len, "ゼロパディング 幅6精度4", "ft_printf: [%06.4d]\n");
+
+    // 7. 精度のみ（16進数）
+    printf("\n%s----- 精度4 16進数テスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%.4x]\n", 0xA);
+    std_len = printf("printf:    [%.4x]\n", 0xA);
+    compare_length(ft_len, std_len, "精度4 16進数", "ft_printf: [%.4x]\n");
+
+    // 8. 幅＋精度（16進数）
+    printf("\n%s----- 幅6精度4 16進数テスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%6.4x]\n", 0xAB);
+    std_len = printf("printf:    [%6.4x]\n", 0xAB);
+    compare_length(ft_len, std_len, "幅6精度4 16進数", "ft_printf: [%6.4x]\n");
+
+    // 9. スペースフラグ＋幅＋精度（整数）
+    printf("\n%s----- スペース 幅6精度3 テスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [% 6.3d]\n", 7);
+    std_len = printf("printf:    [% 6.3d]\n", 7);
+    compare_length(ft_len, std_len, "スペース 幅6精度3", "ft_printf: [% 6.3d]\n");
+
+    // 10. プラスフラグ＋幅＋精度（整数）
+    printf("\n%s----- + 幅6精度3 テスト -----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%+6.3d]\n", 7);
+    std_len = printf("printf:    [%+6.3d]\n", 7);
+    compare_length(ft_len, std_len, "+ 幅6精度3", "ft_printf: [%+6.3d]\n");
+
 }
 
 int main(void)

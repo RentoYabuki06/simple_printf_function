@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_put_space_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:06:42 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 20:39:12 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/20 11:41:56 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ int	ft_put_zero(int len)
 	{
 		len--;
 		if (write(STDOUT_FILENO, "0", 1) < 0)
+			return (-1);
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	ft_put_space(int len)
+{
+	while (len > 0)
+	{
+		len--;
+		if (write(STDOUT_FILENO, " ", 1) < 0)
 			return (-1);
 	}
 	return (EXIT_SUCCESS);

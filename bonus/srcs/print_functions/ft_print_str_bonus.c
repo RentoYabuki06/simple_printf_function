@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_str_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:39:03 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 19:22:32 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/20 11:42:50 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,24 @@ int	ft_print_str_bonus(char *str, t_option *option)
 	int	len_total;
 	int	len_str;
 	int	width;
+	int precision;
+	int	len_space;
 
 	if (!str)
 		return (write(STDOUT_FILENO, "(null)", 6));
+	precision = (*option).precision;
 	width = (*option).width;
 	len_str = ft_strlen(str);
-	len_total = len_str;
-	if (width > len_str)
-		len_total = width;
+	if (precision != -1 && precision < len_str)
+		len_str = precision;
+	len_space = width - len_str;
+	if (len_space < 0)
+		len_space = 0;
+	len_total = len_str + len_space;
 	if ((*option).left_aligned == true)
 	{
+		if (ft_put_space(len_space) < 0)
+			return (-1);
 		if (write(STDOUT_FILENO, str, len_str) < 0)
 			return (-1);
 	}
@@ -34,6 +42,8 @@ int	ft_print_str_bonus(char *str, t_option *option)
 		return (-1);
 	if ((*option).left_aligned == false)
 	{
+		if (ft_put_space(len_space) < 0)
+			return (-1);
 		if (write(STDOUT_FILENO, str, len_str) < 0)
 			return (-1);
 	}

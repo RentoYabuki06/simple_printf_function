@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:36:12 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 20:39:16 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/20 11:40:41 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	ft_bzero(void *s, size_t n);
 int		ft_isdigit(int c);
 int		ft_put_char(char c);
 int		ft_put_zero(int len);
+int		ft_put_space(int len);
 int		ft_put_space_or_zero(int width, int len, t_option *option);
 char	*ft_strdup(const char *src);
 size_t	ft_strlen(const char *str);
