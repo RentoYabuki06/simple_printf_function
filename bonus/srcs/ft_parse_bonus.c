@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 16:34:13 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/23 15:20:58 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/23 15:36:22 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ int	ft_parse_format(char *format, t_option *option)
 	// 	option->left_aligned = false;
 	if (option->show_plus == true)
 		option->is_space = false;
-	if (option->left_aligned == true || option->precision != -1)
-		option->zero_padding = false;
 	if (format[i] == '.')
 	{
 		if (format[i + 1])
@@ -120,6 +118,8 @@ int	ft_parse_format(char *format, t_option *option)
 			}
 		}
 	}
+	if (option->left_aligned == true || option->precision != -1)
+		option->zero_padding = false;
 	// if (ft_is_specifier(format[i]) == false)
 	// {
 	// 	if (write(STDOUT_FILENO, "Invalid argument", 17) < 0)

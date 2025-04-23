@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:45 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/23 12:37:28 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/23 15:50:44 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ int	ft_print_nbr_bonus(int num, t_option *option)
 
 	precision = (*option).precision;
 	width = (*option).width;
+	if (num < 0)
+		(*option).is_space = false;
 	total_len = width;
 	if (num == -2147483648)
 		return (ft_print_str_bonus("-2147483648", option));
@@ -115,6 +117,8 @@ int	ft_print_nbr_bonus(int num, t_option *option)
 		total_len = num_len;
 	if (total_len < precision)
 		total_len = precision;
+	if (((*option).is_space == true || (*option).show_plus == true) && (*option).precision > 0)
+		len_zero++;
 	if ((*option).left_aligned == true)
 	{
 		if (num == 0)
@@ -125,10 +129,19 @@ int	ft_print_nbr_bonus(int num, t_option *option)
 		else if (ft_print_number(num, num_len, len_zero, option) < 0)
 			return (-1);
 	}
-	if ((*option).is_space == true || (*option).show_plus == true)
-		len_zero++;
-	if (ft_put_space_or_zero(width, num_len + len_zero, option) < 0)
-		return (-1);
+	if (width > 0)
+	{
+		if ((*option).zero_padding == true)
+		{
+			if (ft_put_zero(width - len_zero - num_len) < 0)
+				return (-1);
+		}
+		else
+		{
+			if (ft_put_space(width - len_zero - num_len) < 0)
+				return (-1);
+		}
+	}
 	if ((*option).left_aligned == false)
 	{
 		if (num == 0)
