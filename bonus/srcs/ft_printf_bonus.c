@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:36:02 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/23 15:20:32 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/23 18:10:31 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	ft_printf(const char *format, ...)
 	char		*tmp_format;
 	va_list		args;
 	t_option	option;
+	bool		white_space;
 
 	tmp_format = ft_strdup(format);
 	va_start(args, format);
@@ -54,35 +55,44 @@ int	ft_printf(const char *format, ...)
 	len_total_len = 0;
 	while (tmp_format[++i])
 	{
+		white_space = false;
 		if (tmp_format[i] == '%')
 		{
 			ft_bzero(&option, sizeof(t_option));
-			parse_len = ft_parse_format(&tmp_format[i + 1], &option);
-			if (parse_len == -1)
+			parse_len = ft_parse_format(&tmp_format[i + 1], &option, &white_space);
+			if (white_space == true)
 			{
-				write(STDOUT_FILENO, "%", 1);
-				len_total_len++;
-				i++;
-				continue;
+				i += parse_len;
+				len_tmp = parse_len + 1;
 			}
-			else if (parse_len == -2)
+			else
 			{
-				len_total_len = -1;
-				break ;
-			}
-			len_tmp = ft_print_format_bonus(&args, &option);
-			if (len_tmp == -2)
-			{
-				if (write(STDOUT_FILENO, "Invalid argument", 17) < 0)
+				if (parse_len == -1)
 				{
-					len_tmp = -1;
+					write(STDOUT_FILENO, "%", 1);
+					len_total_len++;
+					i++;
+					continue;
+				}
+				else if (parse_len == -2)
+				{
+					len_total_len = -1;
 					break ;
 				}
-				i += parse_len;
-				len_tmp = 16;
+				len_tmp = ft_print_format_bonus(&args, &option);
+				if (len_tmp == -2)
+				{
+					if (write(STDOUT_FILENO, "Invalid argument", 17) < 0)
+					{
+						len_tmp = -1;
+						break ;
+					}
+					i += parse_len;
+					len_tmp = 16;
+				}
+				else 
+					i += parse_len;
 			}
-			else 
-				i += parse_len;
 		}
 		else
 			len_tmp = ft_put_char(tmp_format[i]);

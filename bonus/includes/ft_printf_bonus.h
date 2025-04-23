@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:36:12 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/20 11:40:41 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/23 18:07:04 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct	s_option
 
 
 int		ft_printf(const char *format, ...);
-int		ft_parse_format(char *format, t_option *option);
+int		ft_parse_format(char *format, t_option *option, bool *white_space);
 
 /* print_functions */
 int		ft_print_char_bonus(int a, t_option *option);

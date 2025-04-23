@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 16:34:13 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/23 15:36:22 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/23 18:11:45 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,21 @@
 // 		return (true);
 // 	return (false);
 // }
+
+static bool	ft_is_space(char c)
+{
+	if (c == '\n')
+		return (true);
+	if (c == '\t')
+		return (true);
+	if (c == '\f')
+		return (true);
+	if (c == '\v')
+		return (true);
+	if (c == '\r')
+		return (true);
+	return (false);
+}
 
 static bool	ft_is_flag(char c)
 {
@@ -79,9 +94,10 @@ static void	ft_set_flag(char c, t_option *option)
 		option->zero_padding = true;
 }
 
-int	ft_parse_format(char *format, t_option *option)
+int	ft_parse_format(char *format, t_option *option, bool *white_space)
 {
 	int	i;
+	int j;
 
 	i = 0;
 	if (format[i] == '\0')
@@ -120,12 +136,17 @@ int	ft_parse_format(char *format, t_option *option)
 	}
 	if (option->left_aligned == true || option->precision != -1)
 		option->zero_padding = false;
-	// if (ft_is_specifier(format[i]) == false)
-	// {
-	// 	if (write(STDOUT_FILENO, "Invalid argument", 17) < 0)
-	// 		return (-1);
-	// 	return (16);
-	// }
+	if (ft_is_space(format[i]) == true)
+	{
+		j = 0;
+		ft_put_char('%');
+		while (j <= i)
+		{
+			ft_put_char(format[j]);
+			j++;
+		}
+		*white_space = true;
+	}
 	option->specifier = format[i];
 	i++;
 	return (i);

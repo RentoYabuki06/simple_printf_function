@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:20:00 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/23 17:53:59 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/23 17:57:23 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -538,35 +538,35 @@ void    test_bonus_all_flag(void)
     std_len = printf("printf:    [%+-8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     compare_length(ft_len, std_len, "すべてのフラグ", "ft_printf: [%+-8.3d] [%+08.5d] [%#-8.3x]\n");
     // すべてのフラグの組み合わせテスト
-    printf("\n%s----- すべてのフラグ組み合わせテスト -----%s\n", YELLOW, RESET);
+    printf("\n%s----- すべてのフラグ組み合わせテスト[n] -----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%+-\n8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     std_len = printf("printf:    [%+-\n8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     compare_length(ft_len, std_len, "すべてのフラグ", "ft_printf: [%+-\n8.3d] [%+08.5d] [%#-8.3x]\n");
 
 
-    printf("\n%s----- すべてのフラグ組み合わせテスト -----%s\n", YELLOW, RESET);
+    printf("\n%s----- すべてのフラグ組み合わせテスト [t]-----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%+-\t8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     std_len = printf("printf:    [%+-\t8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     compare_length(ft_len, std_len, "すべてのフラグ", "ft_printf: [%+-\t8.3d] [%+08.5d] [%#-8.3x]\n");
 
 
-    printf("\n%s----- すべてのフラグ組み合わせテスト -----%s\n", YELLOW, RESET);
+    printf("\n%s----- すべてのフラグ組み合わせテスト [  ]-----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%+-  8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     std_len = printf("printf:    [%+-  8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     compare_length(ft_len, std_len, "すべてのフラグ", "ft_printf: [%+-  8.3d] [%+08.5d] [%#-8.3x]\n");
 
 
-    printf("\n%s----- すべてのフラグ組み合わせテスト -----%s\n", YELLOW, RESET);
+    printf("\n%s----- すべてのフラグ組み合わせテスト [v]-----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%+-\v8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     std_len = printf("printf:    [%+-\v8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     compare_length(ft_len, std_len, "すべてのフラグ", "ft_printf: [%+-\v8.3d] [%+08.5d] [%#-8.3x]\n");
 
-    printf("\n%s----- すべてのフラグ組み合わせテスト -----%s\n", YELLOW, RESET);
+    printf("\n%s----- すべてのフラグ組み合わせテスト [f]-----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%+-\f8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     std_len = printf("printf:    [%+-\f8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     compare_length(ft_len, std_len, "すべてのフラグ", "ft_printf: [%+-\f8.3d] [%+08.5d] [%#-8.3x]\n");
 
-    printf("\n%s----- すべてのフラグ組み合わせテスト -----%s\n", YELLOW, RESET);
+    printf("\n%s----- すべてのフラグ組み合わせテスト [r]-----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%+-\r8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     std_len = printf("printf:    [%+-\r8.3d] [%+08.5d] [%#-8.3x]\n", 42, 42, 42);
     compare_length(ft_len, std_len, "すべてのフラグ", "ft_printf: [%+-\r8.3d] [%+08.5d] [%#-8.3x]\n");
