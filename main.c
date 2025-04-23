@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:20:00 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/20 11:31:01 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/23 15:14:35 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -485,6 +485,21 @@ void test_bonus_special_flags(void)
     std_len = printf("printf:    [%+6.3d]\n", 7);
     compare_length(ft_len, std_len, "+ 幅6精度3", "ft_printf: [%+6.3d]\n");
 
+    printf("\n%s----- incorrect case 1-----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%+m%m6.3d]\n", 7);
+    std_len = printf("printf:    [%+m%m6.3d]\n", 7);
+    compare_length(ft_len, std_len, "+ 幅6精度3", "ft_printf: [%+6.3d]\n");
+
+
+    printf("\n%s----- incorrect case 2-----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%+m%m6.3d]\n");
+    std_len = printf("printf:    [%+m%m6.3d]\n");
+    compare_length(ft_len, std_len, "+ 幅6精度3", "ft_printf: [%+6.3d]\n");
+
+    printf("\n%s----- incorrect case 3-----%s\n", YELLOW, RESET);
+    ft_len = ft_printf("ft_printf: [%m%%m6.3d]\n");
+    std_len = printf("printf:    [%m%%m6.3d]\n");
+    compare_length(ft_len, std_len, "+ 幅6精度3", "ft_printf: [%+6.3d]\n");
 }
 
 int main(void)
