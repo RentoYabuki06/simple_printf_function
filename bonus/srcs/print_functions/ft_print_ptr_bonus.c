@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_ptr_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:58 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 19:33:08 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/23 12:24:05 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

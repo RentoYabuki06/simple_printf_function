@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 16:34:13 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 20:59:13 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/23 12:27:12 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ int	ft_parse_format(char *format, t_option *option)
 		option->width = ft_atoi(&format[i]);
 		i += ft_len_num(option->width);
 	}
-	if (option->width > 0)
-		option->left_aligned = false;
+	// if (option->width > 0)
+	// 	option->left_aligned = false;
 	if (option->show_plus == true)
 		option->is_space = false;
 	if (option->left_aligned == true || option->precision != -1)

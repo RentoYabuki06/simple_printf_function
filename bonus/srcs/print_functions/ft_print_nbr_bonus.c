@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_nbr_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:45 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 20:43:13 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/23 12:37:28 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,18 @@ static int	ft_len_print_num_bonus(int num, t_option *option)
 	return (total_len);
 }
 
-static int	ft_print_number(int num, int num_len, int num_zero, t_option *option)
+static int	ft_print_number(int num, int num_len, int len_zero, t_option *option)
 {
 	bool	is_negative;
 	int 	total_len;
 
 	total_len = num_len;
 	is_negative = false;
+	if ((*option).is_space == true)
+	{
+		if (ft_put_char(' ') < 0)
+			return (-1);
+	}
 	if (num < 0)
 	{
 		num *= -1;
@@ -77,21 +82,13 @@ static int	ft_print_number(int num, int num_len, int num_zero, t_option *option)
 		if (ft_put_char('-') < 0)
 			return (-1);
 	}
-	if (ft_put_zero(num_zero) < 0)
-		return (-1);
-	if (is_negative == false)
+	if (is_negative == false && (*option).show_plus == true)
 	{
-		if ((*option).show_plus == true)
-		{
-			if (ft_put_char('+') < 0)
-				return (-1);
-		}
-		else if ((*option).is_space == true)
-		{
-			if (ft_put_char(' ') < 0)
-				return (-1);
-		}
+		if (ft_put_char('+') < 0)
+			return (-1);
 	}
+	if (ft_put_zero(len_zero) < 0)
+		return (-1);
 	if (ft_put_nbr_bonus(num) < 0)
 		return (-1);
 	return (total_len);
@@ -128,6 +125,8 @@ int	ft_print_nbr_bonus(int num, t_option *option)
 		else if (ft_print_number(num, num_len, len_zero, option) < 0)
 			return (-1);
 	}
+	if ((*option).is_space == true || (*option).show_plus == true)
+		len_zero++;
 	if (ft_put_space_or_zero(width, num_len + len_zero, option) < 0)
 		return (-1);
 	if ((*option).left_aligned == false)

@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:39:03 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/20 11:42:50 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/23 12:27:38 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,11 @@ int	ft_print_str_bonus(char *str, t_option *option)
 	len_total = len_str + len_space;
 	if ((*option).left_aligned == true)
 	{
-		if (ft_put_space(len_space) < 0)
-			return (-1);
 		if (write(STDOUT_FILENO, str, len_str) < 0)
 			return (-1);
+		if (ft_put_space(len_space) < 0)
+			return (-1);
 	}
-	if (ft_put_space_or_zero(width, len_str, option) < 0)
-		return (-1);
 	if ((*option).left_aligned == false)
 	{
 		if (ft_put_space(len_space) < 0)

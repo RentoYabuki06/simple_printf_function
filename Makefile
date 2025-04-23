@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+         #
+#    By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:59:44 by yabukirento       #+#    #+#              #
-#    Updated: 2025/04/18 18:53:26 by yabukirento      ###   ########.fr        #
+#    Updated: 2025/04/23 12:09:28 by ryabuki          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,12 +57,10 @@ srcs/%.o: srcs/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-# ボーナスターゲットを修正
-bonus: $(OBJS_BONUS)
+bonus: fclean $(OBJS_BONUS)
 	ar rc $(NAME) $(OBJS_BONUS)
 	ranlib $(NAME)
 
-# ボーナスオブジェクトファイル用のより具体的なパターンルール
 bonus/srcs/%.o: bonus/srcs/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES_BONUS) -c $< -o $@
@@ -83,25 +81,21 @@ fclean: clean
 
 re: fclean all
 
-# 通常版テスト（既存）
 test: $(NAME)
 	$(CC) $(INCLUDES) -o test_printf main.c -L. -lftprintf
 	./test_printf
 	$(RM) test_printf
 	@echo "Standard version test completed."
 
-# ボーナステストを修正
 test_bonus: bonus
 	$(CC) $(INCLUDES_BONUS) -D BONUS_TEST=1 -o test_bonus main.c -L. -lftprintf
 	./test_bonus
 	$(RM) test_bonus
 	@echo "Bonus version test completed."
 
-# 全テスト（新規追加）
 test_all: clean all test fclean bonus test_bonus
 	@echo "All tests completed."
 
-# ヘルプメッセージの更新
 help:
 	@echo "Available targets:"
 	@echo "  all       : Build standard library"
