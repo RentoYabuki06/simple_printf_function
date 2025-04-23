@@ -6,28 +6,27 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:06:42 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/23 15:25:50 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/23 18:21:33 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-int	ft_put_space_or_zero(int width, int len, t_option *option)
+int	ft_put_space_or_zero(int len, t_option *option)
 {
-	char	c;
-
-	if (len >= width)
+	if ((*option).width <= 0)
 		return (EXIT_SUCCESS);
-	c = ' ';
 	if ((*option).zero_padding == true)
-		c = '0';
-	while (width - len > 0)
 	{
-		width--;
-		if (write(STDOUT_FILENO, &c, 1) < 0)
+		if (ft_put_zero(len) < 0)
 			return (-1);
 	}
-	return (width - len);
+	else
+	{
+		if (ft_put_space(len) < 0)
+			return (-1);
+	}
+	return (EXIT_SUCCESS);
 }
 
 int	ft_put_zero(int len)

@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:20:00 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/23 17:57:23 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/23 18:22:44 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -575,26 +575,26 @@ void    test_bonus_all_flag(void)
 
 int main(void)
 {
-    // printf("\n%s***** ft_printf テストプログラム *****%s\n", BLUE, RESET);
+    printf("\n%s***** ft_printf テストプログラム *****%s\n", BLUE, RESET);
     
-    // test_format_specifiers();
-    // test_edge_cases();
-    // test_combined_formats();
-    // test_consecutive_percent();
+    test_format_specifiers();
+    test_edge_cases();
+    test_combined_formats();
+    test_consecutive_percent();
     
-    // // 追加テスト
-    // test_special_numbers();
-    // test_special_strings();
-    // test_consecutive_specifiers();
-    // test_boundary_cases();
-    // test_error_handling();
+    // 追加テスト
+    test_special_numbers();
+    test_special_strings();
+    test_consecutive_specifiers();
+    test_boundary_cases();
+    test_error_handling();
     
     // ボーナステスト (ボーナス版でのみ成功します)
     printf("\n%s***** ボーナス機能テスト *****%s\n", BLUE, RESET);
     printf("%s注意: 以下のテストはボーナス版でのみ正常に動作します。%s\n", YELLOW, RESET);
     test_bonus_flags_width_precision();
     test_bonus_special_flags();
-    // test_bonus_persent();
+    test_bonus_persent();
     test_bonus_all_flag();
     
     print_summary();

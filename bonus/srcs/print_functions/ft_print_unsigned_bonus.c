@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_unsigned_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:39:10 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 22:54:11 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/23 18:20:00 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	ft_print_unsigned_bonus(unsigned int num, t_option *option)
 				return (-1);
 		}
 	}
-	if (ft_put_space_or_zero(width, num_len, option) < 0)
+	if (ft_put_space_or_zero(num_len, option) < 0)
 		return (-1);
 	if ((*option).left_aligned == false)
 	{

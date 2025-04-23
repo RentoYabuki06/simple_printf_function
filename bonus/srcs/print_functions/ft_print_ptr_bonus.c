@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:58 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/23 12:24:05 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/23 18:20:53 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_print_ptr_bonus(unsigned long long ptr, t_option *option)
 		if (ft_put_hex_bonus(ptr, true) < 0)
 			return (-1);
 	}
-	if (ft_put_space_or_zero(width, ptr_len, option) < 0)
+	if (ft_put_space_or_zero(width - ptr_len, option) < 0)
 		return (-1);
 	if ((*option).left_aligned == false)
 	{

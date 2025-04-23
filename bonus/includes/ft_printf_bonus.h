@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:36:12 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/23 18:07:04 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/23 18:19:22 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		ft_isdigit(int c);
 int		ft_put_char(char c);
 int		ft_put_zero(int len);
 int		ft_put_space(int len);
-int		ft_put_space_or_zero(int width, int len, t_option *option);
+int		ft_put_space_or_zero(int len, t_option *option);
 char	*ft_strdup(const char *src);
 size_t	ft_strlen(const char *str);
 
