@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:20:00 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/23 15:14:35 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/23 15:31:39 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -486,20 +486,53 @@ void test_bonus_special_flags(void)
     compare_length(ft_len, std_len, "+ 幅6精度3", "ft_printf: [%+6.3d]\n");
 
     printf("\n%s----- incorrect case 1-----%s\n", YELLOW, RESET);
-    ft_len = ft_printf("ft_printf: [%+m%m6.3d]\n", 7);
-    std_len = printf("printf:    [%+m%m6.3d]\n", 7);
-    compare_length(ft_len, std_len, "+ 幅6精度3", "ft_printf: [%+6.3d]\n");
+    ft_len = ft_printf("ft_printf: [%+m6.3d]\n", 7);
+    std_len = printf("printf:    [%+m6.3d]\n", 7);
+    compare_length(ft_len, std_len, "+ 幅6精度3", "ft_printf: [%+m6.3d]\n");
 
 
     printf("\n%s----- incorrect case 2-----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%+m%m6.3d]\n");
     std_len = printf("printf:    [%+m%m6.3d]\n");
-    compare_length(ft_len, std_len, "+ 幅6精度3", "ft_printf: [%+6.3d]\n");
+    compare_length(ft_len, std_len, "+ 幅6精度3", "ft_printf: [%+m%m6.3d]\n");
 
     printf("\n%s----- incorrect case 3-----%s\n", YELLOW, RESET);
     ft_len = ft_printf("ft_printf: [%m%%m6.3d]\n");
     std_len = printf("printf:    [%m%%m6.3d]\n");
-    compare_length(ft_len, std_len, "+ 幅6精度3", "ft_printf: [%+6.3d]\n");
+    compare_length(ft_len, std_len, "+ 幅6精度3", "ft_printf: [%m%%m6.3d]\n");
+
+    printf("\n%s----- %% オプション付きテスト -----\n%s", YELLOW, RESET);
+
+    // ゼロ埋め + 幅5
+    ft_len = ft_printf("ft_printf: [%05%]\n");
+    std_len = printf("printf:    [%05%]\n");
+    compare_length(ft_len, std_len, "ゼロ埋め・幅5", "ft_printf: [%05%]");
+    
+    // 左寄せ + 幅6
+    ft_len = ft_printf("ft_printf: [%-6%]\n");
+    std_len = printf("printf:    [%-6%]\n");
+    compare_length(ft_len, std_len, "左寄せ・幅6", "ft_printf: [%-6%]");
+    
+    // 幅だけ指定（幅3）
+    ft_len = ft_printf("ft_printf: [%3%]\n");
+    std_len = printf("printf:    [%3%]\n");
+    compare_length(ft_len, std_len, "幅3のみ", "ft_printf: [%3%]");
+    
+    // 幅だけ指定（幅1）
+    ft_len = ft_printf("ft_printf: [%1%]\n");
+    std_len = printf("printf:    [%1%]\n");
+    compare_length(ft_len, std_len, "幅1のみ", "ft_printf: [%1%]");
+    
+    // 何もオプションをつけずに%
+    ft_len = ft_printf("ft_printf: [%%]\n");
+    std_len = printf("printf:    [%%]\n");
+    compare_length(ft_len, std_len, "標準的な%出力", "ft_printf: [%%]");
+    
+    // 無効な精度指定（標準printfと差が出やすい）
+    ft_len = ft_printf("ft_printf: [%.3%]\n");
+    std_len = printf("printf:    [%.3%]\n");
+    compare_length(ft_len, std_len, "精度3指定（無効の可能性あり）", "ft_printf: [%.3%]");
+    
 }
 
 int main(void)
