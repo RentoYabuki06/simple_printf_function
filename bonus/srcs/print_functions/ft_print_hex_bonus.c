@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_hex_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:35 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 22:55:08 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/23 16:41:12 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,19 @@ int	ft_print_hex_bonus(unsigned int num, char format, t_option *option)
 				return (-1);
 		}
 	}
-	if (ft_put_space_or_zero(width, num_len, option) < 0)
-		return (-1);
+	if (width > 0)
+	{
+		if ((*option).zero_padding == true)
+		{
+			if (ft_put_zero(width - len_zero - num_len) < 0)
+				return (-1);
+		}
+		else
+		{
+			if (ft_put_space(width - len_zero - num_len) < 0)
+				return (-1);
+		}
+	}
 	if ((*option).left_aligned == false)
 	{
 		if (num == 0)
