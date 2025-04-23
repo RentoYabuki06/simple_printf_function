@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_percent_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:52 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 19:32:31 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/23 16:39:19 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,9 @@
 
 int	ft_print_percent_bonus(t_option *option)
 {
-	int	width;
+	(void)	option;
 
-	width = (*option).width;
-	if ((*option).left_aligned == true)
-	{
-		if (write(STDOUT_FILENO, "%", 1) < 0)
-			return (-1);
-	}
-	if(ft_put_space_or_zero(width, 1,  option) < 0)
+	if (write(STDOUT_FILENO, "%", 1) < 0)
 		return (-1);
-	if ((*option).left_aligned == false)
-	{
-		if (write(STDOUT_FILENO, "%", 1) < 0)
-			return (-1);
-	}
-	if (width > 0)
-		return (width);
 	return (1);
 }
