@@ -6,34 +6,34 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 16:34:13 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/23 12:27:12 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/23 15:20:58 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-static bool ft_is_specifier(char c)
-{
-	if (c == 'c')
-		return (true);
-	if (c == 's')
-		return (true);
-	if (c == 'p')
-		return (true);
-	if (c == 'd')
-		return (true);
-	if (c == 'i')
-		return (true);
-	if (c == 'u')
-		return (true);
-	if (c == 'x')
-		return (true);
-	if (c == 'X')
-		return (true);
-	if (c == '%')
-		return (true);
-	return (false);
-}
+// static bool ft_is_specifier(char c)
+// {
+// 	if (c == 'c')
+// 		return (true);
+// 	if (c == 's')
+// 		return (true);
+// 	if (c == 'p')
+// 		return (true);
+// 	if (c == 'd')
+// 		return (true);
+// 	if (c == 'i')
+// 		return (true);
+// 	if (c == 'u')
+// 		return (true);
+// 	if (c == 'x')
+// 		return (true);
+// 	if (c == 'X')
+// 		return (true);
+// 	if (c == '%')
+// 		return (true);
+// 	return (false);
+// }
 
 static bool	ft_is_flag(char c)
 {
@@ -120,8 +120,12 @@ int	ft_parse_format(char *format, t_option *option)
 			}
 		}
 	}
-	if (ft_is_specifier(format[i]) == false)
-		return (-1);
+	// if (ft_is_specifier(format[i]) == false)
+	// {
+	// 	if (write(STDOUT_FILENO, "Invalid argument", 17) < 0)
+	// 		return (-1);
+	// 	return (16);
+	// }
 	option->specifier = format[i];
 	i++;
 	return (i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:36:02 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 19:43:45 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/23 15:20:32 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int	ft_print_format_bonus(va_list *args, t_option *option)
 		count_chars += ft_print_hex_bonus(va_arg(*args, unsigned int), format, option);
 	else if (format == '%')
 		count_chars += ft_print_percent_bonus(option);
+	else
+		count_chars = -2;
 	return (count_chars);
 }
 
@@ -69,7 +71,18 @@ int	ft_printf(const char *format, ...)
 				break ;
 			}
 			len_tmp = ft_print_format_bonus(&args, &option);
-			i += parse_len;
+			if (len_tmp == -2)
+			{
+				if (write(STDOUT_FILENO, "Invalid argument", 17) < 0)
+				{
+					len_tmp = -1;
+					break ;
+				}
+				i += parse_len;
+				len_tmp = 16;
+			}
+			else 
+				i += parse_len;
 		}
 		else
 			len_tmp = ft_put_char(tmp_format[i]);
