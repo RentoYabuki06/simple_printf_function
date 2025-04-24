@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:20:00 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/23 18:22:44 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/24 11:44:33 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -573,6 +573,290 @@ void    test_bonus_all_flag(void)
     
 }
 
+void    test_bonus_c(void)
+{
+    int ft_len, std_len;
+    printf("\n%s----- %%c オプション テストケース -----%s\n", YELLOW, RESET);
+
+    // 基本
+    ft_len = ft_printf("ft_printf: [%c]\n", 'A');
+    std_len = printf("printf:    [%c]\n", 'A');
+    compare_length(ft_len, std_len, "基本", "ft_printf: [%c]\n");
+
+    // 幅指定
+    ft_len = ft_printf("ft_printf: [%5c]\n", 'A');
+    std_len = printf("printf:    [%5c]\n", 'A');
+    compare_length(ft_len, std_len, "幅5", "ft_printf: [%5c]\n");
+
+    // 左寄せ
+    ft_len = ft_printf("ft_printf: [%-5c]\n", 'A');
+    std_len = printf("printf:    [%-5c]\n", 'A');
+    compare_length(ft_len, std_len, "-左寄せ 幅5", "ft_printf: [%-5c]\n");
+
+    // NULL文字（'\0'）出力
+    ft_len = ft_printf("ft_printf: [%c]\n", '\0');
+    std_len = printf("printf:    [%c]\n", '\0');
+    compare_length(ft_len, std_len, "NULL文字", "ft_printf: [%c]\n");
+
+}
+void    test_bonus_s(void)
+{
+    int ft_len, std_len;
+    printf("\n%s----- %%s オプション テストケース -----%s\n", YELLOW, RESET);
+
+    char *str = "Hello";
+
+    // 基本
+    ft_len = ft_printf("ft_printf: [%s]\n", str);
+    std_len = printf("printf:    [%s]\n", str);
+    compare_length(ft_len, std_len, "基本", "ft_printf: [%s]\n");
+
+    // NULLポインタ
+    ft_len = ft_printf("ft_printf: [%s]\n", NULL);
+    std_len = printf("printf:    [%s]\n", NULL);
+    compare_length(ft_len, std_len, "NULL文字列", "ft_printf: [%s]\n");
+
+    // 幅指定
+    ft_len = ft_printf("ft_printf: [%10s]\n", str);
+    std_len = printf("printf:    [%10s]\n", str);
+    compare_length(ft_len, std_len, "幅10", "ft_printf: [%10s]\n");
+
+    // 左寄せ
+    ft_len = ft_printf("ft_printf: [%-10s]\n", str);
+    std_len = printf("printf:    [%-10s]\n", str);
+    compare_length(ft_len, std_len, "-左寄せ 幅10", "ft_printf: [%-10s]\n");
+
+    // 精度指定（切り取り）
+    ft_len = ft_printf("ft_printf: [%.3s]\n", str);
+    std_len = printf("printf:    [%.3s]\n", str);
+    compare_length(ft_len, std_len, "精度3", "ft_printf: [%.3s]\n");
+
+    // 幅＋精度
+    ft_len = ft_printf("ft_printf: [%10.3s]\n", str);
+    std_len = printf("printf:    [%10.3s]\n", str);
+    compare_length(ft_len, std_len, "幅10 精度3", "ft_printf: [%10.3s]\n");
+
+}
+void    test_bonus_u(void)
+{
+    int ft_len, std_len;
+    printf("\n%s----- %%u オプション テストケース -----%s\n", YELLOW, RESET);
+
+    // 基本
+    ft_len = ft_printf("ft_printf: [%u]\n", 123456);
+    std_len = printf("printf:    [%u]\n", 123456);
+    compare_length(ft_len, std_len, "基本", "ft_printf: [%u]\n");
+
+    // 幅指定
+    ft_len = ft_printf("ft_printf: [%10u]\n", 123456);
+    std_len = printf("printf:    [%10u]\n", 123456);
+    compare_length(ft_len, std_len, "幅10", "ft_printf: [%10u]\n");
+
+    // 0埋め
+    ft_len = ft_printf("ft_printf: [%010u]\n", 123456);
+    std_len = printf("printf:    [%010u]\n", 123456);
+    compare_length(ft_len, std_len, "0埋め 幅10", "ft_printf: [%010u]\n");
+
+    // 精度指定
+    ft_len = ft_printf("ft_printf: [%.8u]\n", 123456);
+    std_len = printf("printf:    [%.8u]\n", 123456);
+    compare_length(ft_len, std_len, "精度8", "ft_printf: [%.8u]\n");
+
+    // 幅＋精度
+    ft_len = ft_printf("ft_printf: [%10.8u]\n", 123456);
+    std_len = printf("printf:    [%10.8u]\n", 123456);
+    compare_length(ft_len, std_len, "幅10 精度8", "ft_printf: [%10.8u]\n");
+
+    // 精度0＋値0（出力なし）
+    ft_len = ft_printf("ft_printf: [%.0u]\n", 0);
+    std_len = printf("printf:    [%.0u]\n", 0);
+    compare_length(ft_len, std_len, "精度0 値0", "ft_printf: [%.0u]\n");
+
+    // 精度0＋値0＋幅あり（空白だけ出力）
+    ft_len = ft_printf("ft_printf: [%5.0u]\n", 0);
+    std_len = printf("printf:    [%5.0u]\n", 0);
+    compare_length(ft_len, std_len, "精度0 値0 幅5", "ft_printf: [%5.0u]\n");
+
+}
+void    test_bonus_x(void)
+{
+    int ft_len, std_len;
+    printf("\n%s----- %%x オプション テストケース -----%s\n", YELLOW, RESET);
+
+    // 基本的な16進出力
+    ft_len = ft_printf("ft_printf: [%x]\n", 255);
+    std_len = printf("printf:    [%x]\n", 255);
+    compare_length(ft_len, std_len, "基本", "ft_printf: [%x]\n");
+
+    // # フラグ（0x付き）
+    ft_len = ft_printf("ft_printf: [%#x]\n", 255);
+    std_len = printf("printf:    [%#x]\n", 255);
+    compare_length(ft_len, std_len, "#フラグ", "ft_printf: [%#x]\n");
+
+    // 幅指定
+    ft_len = ft_printf("ft_printf: [%8x]\n", 255);
+    std_len = printf("printf:    [%8x]\n", 255);
+    compare_length(ft_len, std_len, "幅8", "ft_printf: [%8x]\n");
+
+    // 0埋め
+    ft_len = ft_printf("ft_printf: [%08x]\n", 255);
+    std_len = printf("printf:    [%08x]\n", 255);
+    compare_length(ft_len, std_len, "0埋め 幅8", "ft_printf: [%08x]\n");
+
+    // 精度指定
+    ft_len = ft_printf("ft_printf: [%.5x]\n", 255);
+    std_len = printf("printf:    [%.5x]\n", 255);
+    compare_length(ft_len, std_len, "精度5", "ft_printf: [%.5x]\n");
+
+    // 幅と精度
+    ft_len = ft_printf("ft_printf: [%8.5x]\n", 255);
+    std_len = printf("printf:    [%8.5x]\n", 255);
+    compare_length(ft_len, std_len, "幅8 精度5", "ft_printf: [%8.5x]\n");
+
+    // 左寄せ
+    ft_len = ft_printf("ft_printf: [%-8x]\n", 255);
+    std_len = printf("printf:    [%-8x]\n", 255);
+    compare_length(ft_len, std_len, "-左寄せ", "ft_printf: [%-8x]\n");
+
+    // #と0の組み合わせ
+    ft_len = ft_printf("ft_printf: [%#08x]\n", 255);
+    std_len = printf("printf:    [%#08x]\n", 255);
+    compare_length(ft_len, std_len, "#と0の組み合わせ", "ft_printf: [%#08x]\n");
+
+    // #と精度
+    ft_len = ft_printf("ft_printf: [%#.5x]\n", 255);
+    std_len = printf("printf:    [%#.5x]\n", 255);
+    compare_length(ft_len, std_len, "#と精度5", "ft_printf: [%#.5x]\n");
+
+    // 0と精度（0が無視されるケース）
+    ft_len = ft_printf("ft_printf: [%08.5x]\n", 255);
+    std_len = printf("printf:    [%08.5x]\n", 255);
+    compare_length(ft_len, std_len, "0と精度（0無視）", "ft_printf: [%08.5x]\n");
+
+    // 0の出力
+    ft_len = ft_printf("ft_printf: [%x]\n", 0);
+    std_len = printf("printf:    [%x]\n", 0);
+    compare_length(ft_len, std_len, "0の出力", "ft_printf: [%x]\n");
+
+    // #あり0の出力
+    ft_len = ft_printf("ft_printf: [%#x]\n", 0);
+    std_len = printf("printf:    [%#x]\n", 0);
+    compare_length(ft_len, std_len, "#付き0の出力", "ft_printf: [%#x]\n");
+
+    // 精度0の0
+    ft_len = ft_printf("ft_printf: [%.0x]\n", 0);
+    std_len = printf("printf:    [%.0x]\n", 0);
+    compare_length(ft_len, std_len, "精度0の0", "ft_printf: [%.0x]\n");
+
+    // #と精度0の0
+    ft_len = ft_printf("ft_printf: [%#.0x]\n", 0);
+    std_len = printf("printf:    [%#.0x]\n", 0);
+    compare_length(ft_len, std_len, "#と精度0の0", "ft_printf: [%#.0x]\n");
+
+    // 大きな数
+    ft_len = ft_printf("ft_printf: [%x]\n", 0xFFFFFF);
+    std_len = printf("printf:    [%x]\n", 0xFFFFFF);
+    compare_length(ft_len, std_len, "大きな数", "ft_printf: [%x]\n");
+
+}
+
+void    test_bonus_X(void)
+{
+    int ft_len, std_len;
+    printf("\n%s----- %%X オプション テストケース -----%s\n", YELLOW, RESET);
+
+    // 基本
+    ft_len = ft_printf("ft_printf: [%X]\n", 255);
+    std_len = printf("printf:    [%X]\n", 255);
+    compare_length(ft_len, std_len, "基本", "ft_printf: [%X]\n");
+
+    // # フラグ（0X付き）
+    ft_len = ft_printf("ft_printf: [%#X]\n", 255);
+    std_len = printf("printf:    [%#X]\n", 255);
+    compare_length(ft_len, std_len, "#フラグ", "ft_printf: [%#X]\n");
+
+    // 幅指定
+    ft_len = ft_printf("ft_printf: [%8X]\n", 255);
+    std_len = printf("printf:    [%8X]\n", 255);
+    compare_length(ft_len, std_len, "幅8", "ft_printf: [%8X]\n");
+
+    // 0埋め
+    ft_len = ft_printf("ft_printf: [%08X]\n", 255);
+    std_len = printf("printf:    [%08X]\n", 255);
+    compare_length(ft_len, std_len, "0埋め 幅8", "ft_printf: [%08X]\n");
+
+    // 精度指定
+    ft_len = ft_printf("ft_printf: [%.5X]\n", 255);
+    std_len = printf("printf:    [%.5X]\n", 255);
+    compare_length(ft_len, std_len, "精度5", "ft_printf: [%.5X]\n");
+
+    // 幅と精度
+    ft_len = ft_printf("ft_printf: [%8.5X]\n", 255);
+    std_len = printf("printf:    [%8.5X]\n", 255);
+    compare_length(ft_len, std_len, "幅8 精度5", "ft_printf: [%8.5X]\n");
+
+    // 左寄せ
+    ft_len = ft_printf("ft_printf: [%-8X]\n", 255);
+    std_len = printf("printf:    [%-8X]\n", 255);
+    compare_length(ft_len, std_len, "-左寄せ", "ft_printf: [%-8X]\n");
+
+    // #と0の組み合わせ
+    ft_len = ft_printf("ft_printf: [%#08X]\n", 255);
+    std_len = printf("printf:    [%#08X]\n", 255);
+    compare_length(ft_len, std_len, "#と0の組み合わせ", "ft_printf: [%#08X]\n");
+
+    // 0の出力
+    ft_len = ft_printf("ft_printf: [%X]\n", 0);
+    std_len = printf("printf:    [%X]\n", 0);
+    compare_length(ft_len, std_len, "0の出力", "ft_printf: [%X]\n");
+
+    // #あり0の出力
+    ft_len = ft_printf("ft_printf: [%#X]\n", 0);
+    std_len = printf("printf:    [%#X]\n", 0);
+    compare_length(ft_len, std_len, "#付き0の出力", "ft_printf: [%#X]\n");
+
+    // 精度0の0
+    ft_len = ft_printf("ft_printf: [%.0X]\n", 0);
+    std_len = printf("printf:    [%.0X]\n", 0);
+    compare_length(ft_len, std_len, "精度0の0", "ft_printf: [%.0X]\n");
+
+}
+
+void    test_bonus_p(void)
+{
+    int ft_len, std_len;
+    printf("\n%s----- %%p ポインタ テストケース -----%s\n", YELLOW, RESET);
+
+    void *ptr1 = (void *)0x1234;
+    void *ptr2 = NULL;
+
+    // 基本ポインタ
+    ft_len = ft_printf("ft_printf: [%p]\n", ptr1);
+    std_len = printf("printf:    [%p]\n", ptr1);
+    compare_length(ft_len, std_len, "基本ポインタ", "ft_printf: [%p]\n");
+
+    // NULLポインタ
+    ft_len = ft_printf("ft_printf: [%p]\n", ptr2);
+    std_len = printf("printf:    [%p]\n", ptr2);
+    compare_length(ft_len, std_len, "NULLポインタ", "ft_printf: [%p]\n");
+
+    // 幅指定
+    ft_len = ft_printf("ft_printf: [%20p]\n", ptr1);
+    std_len = printf("printf:    [%20p]\n", ptr1);
+    compare_length(ft_len, std_len, "幅20", "ft_printf: [%20p]\n");
+
+    // 左寄せ
+    ft_len = ft_printf("ft_printf: [%-20p]\n", ptr1);
+    std_len = printf("printf:    [%-20p]\n", ptr1);
+    compare_length(ft_len, std_len, "-左寄せ 幅20", "ft_printf: [%-20p]\n");
+
+    // 0埋め（無視されるが一応確認）
+    ft_len = ft_printf("ft_printf: [%020p]\n", ptr1);
+    std_len = printf("printf:    [%020p]\n", ptr1);
+    compare_length(ft_len, std_len, "0埋め 幅20", "ft_printf: [%020p]\n");
+
+}
+
 int main(void)
 {
     printf("\n%s***** ft_printf テストプログラム *****%s\n", BLUE, RESET);
@@ -589,13 +873,19 @@ int main(void)
     test_boundary_cases();
     test_error_handling();
     
-    // ボーナステスト (ボーナス版でのみ成功します)
-    printf("\n%s***** ボーナス機能テスト *****%s\n", BLUE, RESET);
-    printf("%s注意: 以下のテストはボーナス版でのみ正常に動作します。%s\n", YELLOW, RESET);
-    test_bonus_flags_width_precision();
-    test_bonus_special_flags();
-    test_bonus_persent();
-    test_bonus_all_flag();
+    // // ボーナステスト (ボーナス版でのみ成功します)
+    // printf("\n%s***** ボーナス機能テスト *****%s\n", BLUE, RESET);
+    // printf("%s注意: 以下のテストはボーナス版でのみ正常に動作します。%s\n", YELLOW, RESET);
+    // test_bonus_flags_width_precision();
+    // test_bonus_special_flags();
+    // test_bonus_persent();
+    // test_bonus_all_flag();
+    // test_bonus_c();
+    // test_bonus_s();
+    // test_bonus_u();
+    // test_bonus_x();
+    // test_bonus_X();
+    // test_bonus_p();
     
     print_summary();
     
