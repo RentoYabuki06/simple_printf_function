@@ -1,7 +1,9 @@
 # ft_printf - Custom printf Function Implementation
 
 ## Overview
-**ft_printf** is one of the 42Tokyo projects that involves creating your own version of the C standard library function `printf`. This project strengthens system programming skills through variable arguments, format specifier parsing, and output processing.
+**ft_printf** is one of the 42Tokyo projects that involves creating your own version of the C standard library function `printf`. This project strengthens system programming skills through variable arguments, format specifier parsing, and output processing. 
+
+This implementation is primarily based on the behavior of glibc (GNU C Library) used in Ubuntu and Debian systems. As a result, there may be behavioral differences compared to other C library implementations such as Darwin libc (used in macOS) or musl libc (used in Alpine Linux).
 
 ---
 
