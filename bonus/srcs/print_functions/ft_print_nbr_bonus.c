@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:45 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/25 20:32:50 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/25 20:43:51 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	ft_num_len_bonus(int num, bool is_negative)
 	int	len;
 
 	len = 0;
+	if (num == -2147483648)
+		return (11);
 	if (is_negative == true)
 		len++;
 	if (num == 0)
@@ -32,24 +34,26 @@ static int	ft_num_len_bonus(int num, bool is_negative)
 static int	ft_len_print_num_bonus(int num, t_option *option)
 {
 	bool	is_negative;
-	int 	total_len;
+	int		total_len;
 
 	total_len = 0;
 	if (num == 0)
 		return (1);
 	is_negative = false;
+	if (num == -2147483648)
+		return (write(1, "-2147483648", 11));
 	if (num < 0)
 	{
 		num *= -1;
 		is_negative = true;
 	}
-	if (is_negative == false && ((*option).show_plus == true || (*option).is_space == true))
+	if (!is_negative && ((*option).show_plus || (*option).is_space))
 		total_len++;
 	total_len += ft_num_len_bonus(num, is_negative);
 	return (total_len);
 }
 
-static int	ft_static_print_nbr(int num, int num_len, int len_zero, t_option *option)
+static int	ft_preput_nbr(int num, int num_len, int len_zero, t_option *option)
 {
 	if (num == 0)
 	{
@@ -61,38 +65,42 @@ static int	ft_static_print_nbr(int num, int num_len, int len_zero, t_option *opt
 	return (EXIT_SUCCESS);
 }
 
-int	ft_print_nbr_bonus(int num, t_option *option)
+static int	ft_ret_calc(int num_len, t_option *option)
 {
-	int 	total_len;
-	int 	num_len;
-	int		len_zero;
+	int	total_len;
 
-	if (num < 0)
-		(*option).is_space = false;
 	total_len = (*option).width;
-	if (num == -2147483648)
-		return (ft_print_str_bonus("-2147483648", option));
-	num_len = ft_len_print_num_bonus(num, option);
-	len_zero = (*option).precision - num_len;
-	if (len_zero < 0)
-		len_zero = 0;
 	if (num_len > (*option).width)
 		total_len = num_len;
 	if (total_len < (*option).precision)
 		total_len = (*option).precision;
-	if (((*option).is_space == true || (*option).show_plus == true) && (*option).precision > 0)
+	return (total_len);
+}
+
+int	ft_print_nbr_bonus(int num, t_option *option)
+{
+	int		num_len;
+	int		len_zero;
+
+	if (num < 0)
+		(*option).is_space = false;
+	num_len = ft_len_print_num_bonus(num, option);
+	len_zero = (*option).precision - num_len;
+	if (len_zero < 0)
+		len_zero = 0;
+	if (((*option).is_space || (*option).show_plus) && (*option).precision > 0)
 		len_zero++;
 	if ((*option).left_aligned == true)
 	{
-		if (ft_static_print_nbr(num, num_len, len_zero, option) == EXIT_FAILURE)
+		if (ft_preput_nbr(num, num_len, len_zero, option) == EXIT_FAILURE)
 			return (-1);
 	}
 	if (ft_put_space_or_zero((*option).width - len_zero - num_len, option) < 0)
 		return (-1);
 	if ((*option).left_aligned == false)
 	{
-		if (ft_static_print_nbr(num, num_len, len_zero, option) == EXIT_FAILURE)
+		if (ft_preput_nbr(num, num_len, len_zero, option) == EXIT_FAILURE)
 			return (-1);
 	}
-	return (total_len);
+	return (ft_ret_calc(num_len, option));
 }
