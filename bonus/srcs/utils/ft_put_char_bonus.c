@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_put_char_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 17:46:15 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 17:47:13 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/04/25 20:45:11 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

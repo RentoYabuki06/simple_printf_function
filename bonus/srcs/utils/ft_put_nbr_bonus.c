@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 20:26:39 by ryabuki           #+#    #+#             */
-/*   Updated: 2025/04/25 20:28:00 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/25 20:45:54 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ static int	ft_put_nbr_bonus(int num)
 int	ft_print_number(int num, int num_len, int len_zero, t_option *option)
 {
 	bool	is_negative;
-	int 	total_len;
 
-	total_len = num_len;
 	is_negative = false;
 	if ((*option).is_space == true)
 	{
@@ -54,5 +52,5 @@ int	ft_print_number(int num, int num_len, int len_zero, t_option *option)
 		return (-1);
 	if (ft_put_nbr_bonus(num) < 0)
 		return (-1);
-	return (total_len);
+	return (num_len);
 }
