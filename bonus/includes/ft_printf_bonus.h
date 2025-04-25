@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:36:12 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/25 20:27:16 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/25 20:47:36 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdbool.h>
 # include <limits.h>
 
-typedef struct	s_option
+typedef struct s_option
 {
 	bool	left_aligned;
 	bool	zero_padding;
@@ -30,8 +30,7 @@ typedef struct	s_option
 	int		width;
 	int		precision;
 	char	specifier;
-}				t_option;
-
+}	t_option;
 
 int		ft_printf(const char *format, ...);
 int		ft_parse_format(char *format, t_option *option, bool *white_space);
