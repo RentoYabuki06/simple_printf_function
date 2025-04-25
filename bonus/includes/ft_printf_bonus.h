@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:36:12 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/25 20:47:36 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:28:49 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_option
 }	t_option;
 
 int		ft_printf(const char *format, ...);
-int		ft_parse_format(char *format, t_option *option, bool *white_space);
+int		ft_parse_format(const char *format, t_option *option, bool *flag);
 
 /* print_functions */
 int		ft_print_char_bonus(int a, t_option *option);
@@ -57,5 +57,6 @@ int		ft_put_space_or_zero(int len, t_option *option);
 char	*ft_strdup(const char *src);
 size_t	ft_strlen(const char *str);
 int		ft_print_number(int num, int num_len, int len_zero, t_option *option);
-
+bool	ft_is_space(char c);
+bool	ft_is_flag(char c);
 #endif
