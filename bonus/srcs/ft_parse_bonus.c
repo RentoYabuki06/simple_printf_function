@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 16:34:13 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/25 21:29:49 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:50:48 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	ft_parse_format(const char *format, t_option *option, bool *flag)
 	if (format[i] == '.')
 	{
 		if (format[i + 1])
-		{	
+		{
 			i++;
 			if (ft_isdigit(format[i]) == true)
 			{
