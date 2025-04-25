@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:39:10 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/25 19:35:11 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/25 20:24:15 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,31 +58,32 @@ static int	ft_unsigned_helper(unsigned int num, int len_zero, t_option *option)
 	return (EXIT_SUCCESS);
 }
 
+static int	ft_set_total_len(int num_len, int total_len, t_option *option)
+{
+	if ((*option).width < num_len)
+		total_len = num_len;
+	if (total_len < (*option).precision)
+		total_len = (*option).precision;
+	return (total_len);
+}
+
 int	ft_print_unsigned_bonus(unsigned int num, t_option *option)
 {
-	int	width;
 	int	total_len;
 	int	num_len;
-	int precision;
 	int len_zero;
 
-	precision = (*option).precision;
-	width = (*option).width;
-	total_len = width;
 	num_len = ft_len_unsigned_int_bonus(num);
-	len_zero = precision - num_len;
+	len_zero = (*option).precision - num_len;
 	if (len_zero < 0)
 		len_zero = 0;
-	if (width < num_len)
-		total_len = num_len;
-	if (total_len < precision)
-		total_len = precision;
+	total_len = ft_set_total_len(num_len, (*option).width, option);
 	if ((*option).left_aligned == true)
 	{
 		if (ft_unsigned_helper(num, len_zero, option) == EXIT_FAILURE)
 			return (-1);
 	}
-	if (ft_put_space_or_zero(width - len_zero - num_len, option) < 0)
+	if (ft_put_space_or_zero((*option).width - len_zero - num_len, option) < 0)
 		return (-1);
 	if ((*option).left_aligned == false)
 	{
