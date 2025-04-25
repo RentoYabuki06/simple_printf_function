@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:39:10 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/23 18:20:00 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/25 19:35:11 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,25 @@ static int	ft_put_unsiged_int_bonus(unsigned int num)
 	return (EXIT_SUCCESS);
 }
 
+static int	ft_unsigned_helper(unsigned int num, int len_zero, t_option *option)
+{
+	if (option->precision == 0)
+		return (EXIT_SUCCESS);
+	if (num == 0)
+	{
+		if (ft_put_zero(len_zero + 1) < 0)
+			return (EXIT_FAILURE);
+	}
+	else
+	{
+		if (ft_put_zero(len_zero) < 0)
+			return (EXIT_FAILURE);
+		if (ft_put_unsiged_int_bonus(num) < 0)
+			return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	ft_print_unsigned_bonus(unsigned int num, t_option *option)
 {
 	int	width;
@@ -60,35 +79,15 @@ int	ft_print_unsigned_bonus(unsigned int num, t_option *option)
 		total_len = precision;
 	if ((*option).left_aligned == true)
 	{
-		if (num == 0)
-		{
-			if (ft_put_zero(len_zero + 1) < 0)
-				return (-1);
-		}
-		else
-		{
-			if (ft_put_zero(len_zero) < 0)
-				return (-1);
-			if (ft_put_unsiged_int_bonus(num) < 0)
-				return (-1);
-		}
+		if (ft_unsigned_helper(num, len_zero, option) == EXIT_FAILURE)
+			return (-1);
 	}
-	if (ft_put_space_or_zero(num_len, option) < 0)
+	if (ft_put_space_or_zero(width - len_zero - num_len, option) < 0)
 		return (-1);
 	if ((*option).left_aligned == false)
 	{
-		if (num == 0)
-		{
-			if (ft_put_zero(len_zero + 1) < 0)
-				return (-1);
-		}
-		else
-		{
-			if (ft_put_zero(len_zero) < 0)
-				return (-1);
-			if (ft_put_unsiged_int_bonus(num) < 0)
-				return (-1);
-		}
+		if (ft_unsigned_helper(num, len_zero, option) == EXIT_FAILURE)
+			return (-1);
 	}
 	return (total_len);
 }
