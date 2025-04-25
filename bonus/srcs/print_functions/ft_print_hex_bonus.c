@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:35 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/23 18:19:04 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/25 15:58:41 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,30 @@ int	ft_put_hex_bonus(unsigned long long num, bool is_lower)
 	return (EXIT_SUCCESS);
 }
 
+static int	ft_static_print_hex_bonus(unsigned int num, int len_zero, char format, t_option *option)
+{
+	if (num == 0)
+	{
+		if (ft_put_zero(len_zero + 1) < 0)
+			return (-1);
+	}
+	else
+	{
+		if (ft_put_zero(len_zero) < 0)
+			return (-1);
+		if ((*option).alternative_form == true)
+		{		
+			if (format == 'x' && write(STDOUT_FILENO, "0x", 2) < 0)
+				return (-1);
+			if (format == 'X' && write(STDOUT_FILENO, "0X", 2) < 0)
+				return (-1);
+		}
+		if (num != 0 && ft_put_hex_bonus(num, format == 'x') < 0)
+			return (-1);
+	}
+	return (1);
+}
+
 int	ft_print_hex_bonus(unsigned int num, char format, t_option *option)
 {
 	int	width;
@@ -72,51 +96,23 @@ int	ft_print_hex_bonus(unsigned int num, char format, t_option *option)
 		total_len = num_len;
 	if (total_len < precision)
 		total_len = precision;
+	if (((*option).is_space == true || (*option).show_plus == true) && (*option).precision > 0)
+		len_zero++;
 	if ((*option).left_aligned == true)
 	{
-		if (num == 0)
-		{
-			if (ft_put_zero(len_zero + 1) < 0)
-				return (-1);
-		}
-		else
-		{
-			if (ft_put_zero(len_zero) < 0)
-				return (-1);
-			if ((*option).alternative_form == true)
-			{		
-				if (format == 'x' && write(STDOUT_FILENO, "0x", 2) < 0)
-					return (-1);
-				if (format == 'X' && write(STDOUT_FILENO, "0X", 2) < 0)
-					return (-1);
-			}
-			if (num != 0 && ft_put_hex_bonus(num, format == 'x') < 0)
-				return (-1);
-		}
+		if ((*option).precision == 0 && num == 0)
+			return (0);
+		else if (ft_static_print_hex_bonus(num, len_zero, format, option) < 0)
+			return (-1);
 	}
 	if (ft_put_space_or_zero(width - len_zero - num_len, option) < 0)
 		return (-1);
 	if ((*option).left_aligned == false)
 	{
-		if (num == 0)
-		{
-			if (ft_put_zero(len_zero + 1) < 0)
-				return (-1);
-		}
-		else
-		{
-			if (ft_put_zero(len_zero) < 0)
-				return (-1);
-			if ((*option).alternative_form == true)
-			{		
-				if (format == 'x' && write(STDOUT_FILENO, "0x", 2) < 0)
-					return (-1);
-				if (format == 'X' && write(STDOUT_FILENO, "0X", 2) < 0)
-					return (-1);
-			}
-			if (num != 0 && ft_put_hex_bonus(num, format == 'x') < 0)
-				return (-1);
-		}
+		if ((*option).precision == 0 && num == 0)
+			return (0);
+		if (ft_static_print_hex_bonus(num, len_zero, format, option) < 0)
+			return (-1);
 	}
 	return (total_len);
 }
