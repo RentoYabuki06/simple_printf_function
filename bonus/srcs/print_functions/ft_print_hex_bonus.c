@@ -6,50 +6,11 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:35 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/25 19:26:02 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/25 19:54:09 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
-
-int	ft_hex_len_bonus(unsigned long long num)
-{
-	int	len;
-
-	len = 0;
-	if (num == 0)
-		return (1);
-	while (num != 0)
-	{
-		len++;
-		num /= 16;
-	}
-	return (len);
-}
-
-int	ft_put_hex_bonus(unsigned long long num, bool is_lower)
-{
-	if (num >= 16)
-	{
-		if (ft_put_hex_bonus(num / 16, is_lower) < 0)
-			return (-1);
-		if (ft_put_hex_bonus(num % 16, is_lower) < 0)
-			return (-1);
-	}
-	else
-	{
-		if (num <= 9)
-			return (ft_put_char('0' + num));
-		else
-		{
-			if (is_lower == true)
-				return (ft_put_char('a' + num - 10));
-			else
-				return (ft_put_char('A' + num - 10));
-		}
-	}
-	return (EXIT_SUCCESS);
-}
 
 static int	ft_static_print_hex_bonus(unsigned int num, int len_zero, char format)
 {
@@ -73,23 +34,21 @@ int	ft_print_hex_bonus(unsigned int num, char format, t_option *option)
 	int	width;
 	int	total_len;
 	int	num_len;
-	int	precision;
 	int	len_zero;
 
-	precision = (*option).precision;
 	width = (*option).width;
 	total_len = width;
 	num_len = ft_hex_len_bonus(num);
-	len_zero = precision - num_len;
+	len_zero = (*option).precision - num_len;
 	if (len_zero < 0)
 		len_zero = 0;
 	if (num != 0 && (*option).alternative_form == true)
 		num_len += 2;
 	if (width < num_len)
 		total_len = num_len;
-	if (total_len < precision)
+	if (total_len < (*option).precision)
 	{
-		total_len = precision;
+		total_len = (*option).precision;
 		if (num != 0 && (*option).alternative_form == true)
 			total_len += 2;
 	}
