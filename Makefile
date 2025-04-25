@@ -6,7 +6,7 @@
 #    By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:59:44 by yabukirento       #+#    #+#              #
-#    Updated: 2025/04/25 19:54:37 by ryabuki          ###   ########.fr        #
+#    Updated: 2025/04/25 20:27:45 by ryabuki          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS_BONUS =	bonus/srcs/ft_printf_bonus.c \
 				bonus/srcs/utils/ft_put_space_bonus.c \
 				bonus/srcs/utils/ft_put_char_bonus.c \
 				bonus/srcs/utils/ft_put_hex_bonus.c \
+				bonus/srcs/utils/ft_put_nbr_bonus.c \
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)

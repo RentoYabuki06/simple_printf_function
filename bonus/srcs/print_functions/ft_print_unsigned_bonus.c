@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:39:10 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/25 20:24:15 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/25 20:25:18 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_print_unsigned_bonus(unsigned int num, t_option *option)
 {
 	int	total_len;
 	int	num_len;
-	int len_zero;
+	int	len_zero;
 
 	num_len = ft_len_unsigned_int_bonus(num);
 	len_zero = (*option).precision - num_len;

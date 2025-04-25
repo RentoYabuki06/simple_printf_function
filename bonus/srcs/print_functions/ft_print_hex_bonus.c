@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:35 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/25 20:02:02 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/25 20:11:20 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	ft_print_hex_bonus(unsigned int num, char format, t_option *option)
 	{
 		if ((*option).precision == 0 && num == 0)
 			return (0);
-		if (ft_static_print_hex_bonus(num, len_zero, format) < 0)
+		else if (ft_static_print_hex_bonus(num, len_zero, format) < 0)
 			return (-1);
 	}
 	return (total_len);

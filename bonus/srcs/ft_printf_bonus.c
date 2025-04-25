@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:36:02 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/23 18:10:31 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/25 20:16:53 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	ft_print_format_bonus(va_list *args, t_option *option)
 	else if (format == 'x' || format == 'X')
 		count_chars += ft_print_hex_bonus(va_arg(*args, unsigned int), format, option);
 	else if (format == '%')
-		count_chars += ft_print_percent_bonus(option);
+		count_chars += ft_print_percent_bonus();
 	else
 		count_chars = -2;
 	return (count_chars);

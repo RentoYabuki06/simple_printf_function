@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:36:12 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/23 18:19:22 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/04/25 20:27:16 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		ft_parse_format(char *format, t_option *option, bool *white_space);
 /* print_functions */
 int		ft_print_char_bonus(int a, t_option *option);
 int		ft_print_str_bonus(char *str, t_option *option);
-int		ft_print_percent_bonus(t_option *option);
+int		ft_print_percent_bonus(void);
 int		ft_print_ptr_bonus(unsigned long long a, t_option *option);
 int		ft_print_nbr_bonus(int a, t_option *option);
 int		ft_print_hex_bonus(unsigned int num, char format, t_option *option);
@@ -57,5 +57,6 @@ int		ft_put_space(int len);
 int		ft_put_space_or_zero(int len, t_option *option);
 char	*ft_strdup(const char *src);
 size_t	ft_strlen(const char *str);
+int		ft_print_number(int num, int num_len, int len_zero, t_option *option);
 
 #endif
