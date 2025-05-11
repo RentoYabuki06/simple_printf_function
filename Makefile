@@ -6,7 +6,7 @@
 #    By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:59:44 by yabukirento       #+#    #+#              #
-#    Updated: 2025/05/11 10:18:11 by ryabuki          ###   ########.fr        #
+#    Updated: 2025/05/11 10:24:05 by ryabuki          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,9 +60,10 @@ srcs/%.o: srcs/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-bonus: fclean $(OBJS_BONUS)
+bonus: $(OBJS_BONUS)
 	ar rc $(NAME) $(OBJS_BONUS)
 	ranlib $(NAME)
+	@touch bonus
 
 bonus/srcs/%.o: bonus/srcs/%.c
 	@mkdir -p $(dir $@)
