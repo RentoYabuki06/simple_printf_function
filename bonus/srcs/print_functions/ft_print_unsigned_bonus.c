@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:39:10 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/25 20:25:18 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/05/11 10:08:20 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ static int	ft_set_total_len(int num_len, int total_len, t_option *option)
 		total_len = num_len;
 	if (total_len < (*option).precision)
 		total_len = (*option).precision;
+	if ((*option).precision == 0 && (*option).width == 0)
+		total_len = 0;
 	return (total_len);
 }
 

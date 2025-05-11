@@ -6,7 +6,7 @@
 /*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 14:38:35 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/25 21:50:15 by ryabuki          ###   ########.fr       */
+/*   Updated: 2025/05/11 10:06:01 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static int	ft_total(unsigned int num, int num_len, int ret, t_option *option)
 		if (num != 0 && (*option).alternative_form == true)
 			ret += 2;
 	}
+	if ((*option).precision == 0 && (*option).width == 0)
+		ret = 0;
 	return (ret);
 }
 
