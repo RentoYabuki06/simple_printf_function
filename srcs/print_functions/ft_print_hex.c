@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:04:41 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/18 12:27:03 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/05/11 10:20:16 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ int	ft_print_hex(unsigned int nbr, char format)
 		return (write(STDOUT_FILENO, "0", 1));
 	if (0 > ft_put_hex(nbr, format == 'x'))
 		return (-1);
-	return(ft_hex_len(nbr));
+	return (ft_hex_len(nbr));
 }
