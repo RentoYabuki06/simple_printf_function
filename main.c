@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
+/*   By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:20:00 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/04/24 11:53:46 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/05/11 10:14:41 by ryabuki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,27 +304,6 @@ void test_boundary_cases(void)
     std_len = printf("printf:    Test%");
     printf("\n");  // 改行を追加
     compare_length(ft_len, std_len, "末尾%", "ft_printf: Test%");
-}
-
-// エラー処理テスト (ft_printfによっては実装が異なる)
-void test_error_handling(void)
-{
-    int ft_len, std_len;
-    
-    printf("\n%s===== エラー処理テスト =====%s\n", BLUE, RESET);
-    
-    // 認識されないフォーマット指定子
-    printf("\n%s----- 未知の指定子テスト -----%s\n", YELLOW, RESET);
-    printf("※ このテストはft_printfの実装により結果が異なる場合があります\n");
-    ft_len = ft_printf("ft_printf: %z\n");
-    std_len = printf("printf:    %z\n");
-    compare_length(ft_len, std_len, "未知の指定子", "ft_printf: %z\n");
-    // 認識されないフォーマット指定子
-    printf("\n%s----- 未知の指定子テスト ver2 -----%s\n", YELLOW, RESET);
-    printf("※ このテストはft_printfの実装により結果が異なる場合があります\n");
-    ft_len = ft_printf("ft_printf: %q%%\n");
-    std_len = printf("printf:    %q%%\n");
-    compare_length(ft_len, std_len, "未知の指定子", "ft_printf: %q\n");
 }
 
 // ボーナス: フラグと幅/精度の組み合わせテスト
@@ -909,7 +888,6 @@ int main(void)
     test_special_strings();
     test_consecutive_specifiers();
     test_boundary_cases();
-    test_error_handling();
     
     // ボーナステスト (ボーナス版でのみ成功します)
     printf("\n%s***** ボーナス機能テスト *****%s\n", BLUE, RESET);
