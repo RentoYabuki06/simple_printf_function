@@ -6,11 +6,11 @@
 #    By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:59:44 by yabukirento       #+#    #+#              #
-#    Updated: 2025/05/11 09:54:22 by ryabuki          ###   ########.fr        #
+#    Updated: 2025/05/11 10:18:11 by ryabuki          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I./includes
 INCLUDES_BONUS = -I./bonus/includes
