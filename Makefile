@@ -6,7 +6,7 @@
 #    By: ryabuki <ryabuki@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/03 14:59:44 by yabukirento       #+#    #+#              #
-#    Updated: 2025/04/25 21:29:30 by ryabuki          ###   ########.fr        #
+#    Updated: 2025/05/11 09:54:22 by ryabuki          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,13 +84,13 @@ fclean: clean
 
 re: fclean all
 
-test: $(NAME)
+test: fclean $(NAME)
 	$(CC) $(INCLUDES) -o test_printf main.c -L. -lftprintf
 	./test_printf
 	$(RM) test_printf
 	@echo "Standard version test completed."
 
-test_bonus: bonus
+test_bonus: fclean bonus
 	$(CC) $(INCLUDES_BONUS) -D BONUS_TEST=1 -o test_bonus main.c -L. -lftprintf
 	./test_bonus
 	$(RM) test_bonus
